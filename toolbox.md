@@ -54,3 +54,20 @@ a, b = map(int, input().split())
 
 print(f"a+b: {a + b}")
 ```
+
+### 標準入力から空白区切りで複数の数値を読み込みリスト化する
+
+```python
+l = [a for a in map(int, input().split())]
+
+print(l)
+```
+
+### リストをソートする
+
+```python
+l = [(87, 0), (87, 1), (87, 2), (88, 3), (41, 4), (38, 5), (41, 6), (38, 7)]
+
+sorted_l = sorted(l, reverse=False, key=lambda x: x[1]):
+# reverseがTのときは、max to minになる。
+```
