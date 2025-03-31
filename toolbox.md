@@ -2,39 +2,10 @@
 
 サンプルをコピペして標準入力から読み込ませるのはめんどくさい。
 
-- StringIO を使用する。
-- 環境変数を参照して、ローカルと提出環境を判断する。
-
-仮想環境を作成する。
-
-```bash
-sudo apt update
-sudo apt install python3.12-venv
-python3 -m venv ~/.at_coder
-. ~/.at_coder/bin/activate
-pip install dotenv
-```
-
-.env に環境変数を設定する。
-
-```
-LOCAL_DEBUG=T
-```
-
-プログラムに環境変数で標準入力を読むか・サンプルデータを読むか分岐するコードを入れる。
+コード中にサンプルデータをコメントとして埋め込む。
 
 ```python
-import io
-import os
-import sys
-
-try:
-    from dotenv import load_dotenv
-    load_dotenv()  # .env
-except ModuleNotFoundError:
-    pass  # ignore no dotenv error
-
-TEST_DATA = """
+"""TEST_DATA
 6
 abcarc
 agcahc
@@ -44,24 +15,12 @@ atcoder
 contest
 
 """
+```
 
-if os.getenv("LOCAL_DEBUG"):
-    # trim \n and blank lines
-    sys.stdin = io.StringIO(TEST_DATA[1:].replace('\n\n', '\n'))
+コードを実行する。
 
-
-def code():
-    pass
-
-if os.getenv("LOCAL_DEBUG"):
-    while True:
-        try:
-            code()
-        except EOFError:
-            break
-else:
-    code()
-
+```bash
+python3 validate.py ABC_399/A.py
 ```
 
 ### 標準入力から読み込み
