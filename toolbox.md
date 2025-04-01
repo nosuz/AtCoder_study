@@ -58,7 +58,8 @@ print(f"a+b: {a + b}")
 ### 標準入力から空白区切りで複数の数値を読み込みリスト化する
 
 ```python
-l = [a for a in map(int, input().split())]
+# l = [a for a in map(int, input().split())]
+l = list(map(int, input().split()))
 
 print(l)
 ```
