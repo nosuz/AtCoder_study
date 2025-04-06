@@ -16,12 +16,10 @@
 n, m = map(int, input().split())
 
 total = 0
-try:
-    for i in range(m + 1):
-        total += n ** i
-        if total > 1_000_000_000:
-            total = "inf"
-except TypeError:
-    total = "inf"
-
-print(total)
+for i in range(m + 1):
+    total += n ** i
+    if total > 1_000_000_000:
+        print("inf")
+        break
+else:
+    print(total)
