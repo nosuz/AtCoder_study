@@ -1,12 +1,12 @@
 """TEST_DATA
 10
-#40
+<expected> 40
 
 11
-#-1
+<expected> -1
 
 400
-#1
+<expected> 1
 
 """
 

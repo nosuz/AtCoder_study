@@ -1,15 +1,15 @@
 """TEST_DATA
 7 3
-# 400
+<expected> 400
 
 1000000 2
-# inf
+<expected> inf
 
 999999999 1
-# 1000000000
+<expected> 1000000000
 
 998244353 99
-# inf
+<expected> inf
 
 """
 

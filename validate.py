@@ -22,7 +22,7 @@ def run_prog_with_data(prog_name, data):
             continue
 
         try:
-            input_data, expected_answer = block.split("#")
+            input_data, expected_answer = block.split("<expected>")
             expected_answer = expected_answer.lstrip()
         except ValueError:
             input_data = block
