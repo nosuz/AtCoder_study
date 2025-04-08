@@ -51,6 +51,8 @@ print(f"a: {a}, b: {b}")
 
 ```python
 a, b = map(int, input().split())
+# TypeError: 'list' object is not callable になった時の対応
+a, b, c, d = [int(v) for v in input().split()]
 
 print(f"a+b: {a + b}")
 ```
