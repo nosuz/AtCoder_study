@@ -1,6 +1,11 @@
 import re
 import subprocess
 import sys
+import argparse
+
+
+def parse_limit(value):
+    return set(map(int, value.split(',')))
 
 
 def extract_test_data(filename):
@@ -17,8 +22,8 @@ def extract_test_data(filename):
 def run_prog_with_data(prog_name, data):
     blocks = data.strip().split("\n\n")  # Split into blocks by empty lines
     for index, block in enumerate(blocks):
-        # skip comment outed sample
-        if block[0] == '#':
+        # skip not specified sample
+        if args.limit and not index in args.limit:
             continue
 
         try:
@@ -46,14 +51,17 @@ def run_prog_with_data(prog_name, data):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python3 validate.py <filename>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--limit', type=parse_limit,
+                        help='limit validation sample. --limit 1,2,3')
+    parser.add_argument('filename', help='target code file')
 
-    filename = sys.argv[1]
-    extracted_data = extract_test_data(filename)
+    args = parser.parse_args()
+
+    # filename = sys.argv[1]
+    extracted_data = extract_test_data(args.filename)
     if extracted_data is not None:
         # Use filename as program name
-        run_prog_with_data(filename, extracted_data)
+        run_prog_with_data(args.filename, extracted_data)
     else:
         print("TEST_DATA not found.")
