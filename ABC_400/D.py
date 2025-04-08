@@ -73,10 +73,7 @@ while len(next_stack) > 0:
     next_stack = set()
     kicked = set()
     while len(stack) > 0:
-        pos = stack.pop()
-
-        row = pos[0]
-        col = pos[1]
+        row, col = stack.pop()
         if visited[row][col]:
             continue
 
@@ -84,13 +81,13 @@ while len(next_stack) > 0:
         map_data[row][col] = str(step)  # for debug
 
         if row == frow and col == fcol:
-            # arrived
+            # arrived at the fish market
             break
 
         for delta in [(-1, 0), (0, -1), (1, 0), (0,  1),]:
             y = row + delta[0]
             x = col + delta[1]
-            if w > x >= 0 and h > y >= 0:
+            if (w > x >= 0 and h > y >= 0) and not visited[y][x]:
                 if map_data[y][x] == '#':
                     # visit at the next round
                     next_stack.add((y, x))
