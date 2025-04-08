@@ -68,7 +68,6 @@ next_stack.add((trow, tcol))
 
 step = 0
 while len(next_stack) > 0:
-    step += 1
     stack = next_stack
     next_stack = set()
     kicked = set()
@@ -80,6 +79,7 @@ while len(next_stack) > 0:
         visited[row][col] = True
         map_data[row][col] = str(step)  # for debug
 
+        # if visited[frow][fcol]:
         if row == frow and col == fcol:
             # arrived at the fish market
             break
@@ -101,18 +101,28 @@ while len(next_stack) > 0:
                         kicked.add((_y, _x))
                 else:
                     stack.add((y, x))
+    else:
+        # no break or not reached the fish
 
-    # remove broken walls
-    for pos in kicked:
-        row, col = pos
-        map_data[row][col] = str(step)
+        # remove broken walls
+        step += 1
+        for pos in kicked:
+            row, col = pos
+            map_data[row][col] = str(step)
+
+        # for i, row in enumerate(map_data):
+        #     print("".join(row))
+        #     # print(visited[i])
+        # print("-----")
+
+        continue
 
     # for i, row in enumerate(map_data):
     #     print("".join(row))
     #     # print(visited[i])
     # print("-----")
 
-    if visited[frow][fcol]:
-        break
+    # breaked
+    break
 
-print(step - 1)
+print(step)
