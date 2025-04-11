@@ -37,7 +37,7 @@ def run_prog_with_data(prog_name, data):
         process = subprocess.Popen(["python3", prog_name], stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate(input=input_data)
-        stdout = stdout.strip()
+        stdout = stdout.strip().replace('\n', ' ')
         print(f"Output {index}")
         print(stdout, stderr)
         if process.returncode != 0:
