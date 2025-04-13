@@ -77,3 +77,9 @@ l = [(87, 0), (87, 1), (87, 2), (88, 3), (41, 4), (38, 5), (41, 6), (38, 7)]
 sorted_l = sorted(l, reverse=False, key=lambda x: x[1]):
 # reverseがTのときは、max to minになる。
 ```
+
+### プログラムを終了させる
+
+```python
+exit()
+```
