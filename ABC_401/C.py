@@ -17,6 +17,9 @@
 10 3
 <expected> 193
 
+4 4
+<expected> 4
+
 """
 
 n, k = map(int, input().split())
@@ -48,3 +51,20 @@ for i in range(k + 1, n + 1):
     # print(f"i: {i} -> {sum}")
     a[i] = sum % 1_000_000_000
 print(a[n])
+
+# a = [1] * k
+# a.append(k)
+
+# MOD = len(a)
+
+# if k == n:
+#     print(k)
+#     exit()
+
+# for i in range(k + 1, n + 1):
+#     prev = a[(i - 1) % MOD]
+#     shift_out = a[i % MOD]
+#     sum = prev * 2 - shift_out
+#     # print(f"i: {i} -> {sum}")
+#     a[i % MOD] = sum % 1_000_000_000
+# print(a[i % MOD])
