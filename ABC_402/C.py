@@ -24,48 +24,24 @@
 
 """
 
-from operator import itemgetter
-
-
-def generate_sort_key(eat):
-    return lambda x: tuple(-x[i] for i in reversed(eat))
-
-
 n, m = map(int, input().split())
 
-dishes = []
-for i in range(m):
+items = [set() for _ in range(n + 1)]
+for i in range(1, m + 1):
     dish = list(map(int, input().split()))
-    items = [False] * (n + 1)
-    for i in dish[1:]:
-        items[i] = True
-    dishes.append(items)
-    # items = set(dish[1:])
-    # dishes.append([True if i in items else False for i in range(n + 1)])
-# print(dishes)
+    for item in dish[1:]:
+        items[item].add(i)
+# print(items)
 
 eat = list(map(int, input().split()))
 # print(eat)
-sorted_dishes = sorted(dishes, key=generate_sort_key(eat), reverse=True)
-# for dish in sorted_dishes:
-#     print(dish)
 
-mask = [True] * (n + 1)
-index = 0
-edible = []
-for item in eat:
-    mask[item] = False
-    # print(mask)
-    while True:
-        for a, b in zip(mask, sorted_dishes[index]):
-            if a and b:
-                break
-        else:
-            index += 1
-            if index == len(sorted_dishes):
-                break
-            continue
-
-        break
-    edible.append(index)
-print(" ".join(map(str, edible)))
+ok = [m]
+ok_dishes = set()
+for i in range(len(eat) - 1, 0, -1):
+    item = eat[i]
+    ok_dishes |= items[item]
+    ok.append(m - len(ok_dishes))
+# print(ok)
+ok.reverse()
+print(" ".join(list(map(str, ok))))
