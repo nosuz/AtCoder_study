@@ -36,12 +36,11 @@ for i in range(1, m + 1):
 eat = list(map(int, input().split()))
 # print(eat)
 
-ok = [m]
+ok = [m] * n
 ok_dishes = set()
-for i in range(len(eat) - 1, 0, -1):
+for i in range(n - 1, 0, -1):
     item = eat[i]
     ok_dishes |= items[item]
-    ok.append(m - len(ok_dishes))
+    ok[i - 1] = m - len(ok_dishes)
 # print(ok)
-ok.reverse()
 print(" ".join(list(map(str, ok))))
