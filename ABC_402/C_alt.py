@@ -26,6 +26,7 @@
 
 n, m = map(int, input().split())
 
+# memo items for dishes
 dishes = []
 for _ in range(m):
     dish = list(map(int, input().split()))
@@ -35,12 +36,15 @@ for _ in range(m):
 eat = list(map(int, input().split()))
 # print(eat)
 
+# make a table to convert items to edible day
 edible = [0] * (n + 1)
 for day in range(n):
     item = eat[day]
+    # edible date start at 0
     edible[item] = day
 # print(edible)
 
+# determine the day to eat
 ok = [0] * n
 for items in dishes:
     max_day = 0
@@ -51,6 +55,7 @@ for items in dishes:
     # print(f"{items} -> {max_day}")
     ok[max_day] += 1
 
+# sum edible dishes.
 sum = 0
 ok_num = []
 for i in range(n):
