@@ -36,11 +36,11 @@ for i in range(1, m + 1):
 eat = list(map(int, input().split()))
 # print(eat)
 
-ok = [m] * n
-ok_dishes = set()
+ng = [m] * n
+ng_dishes = set()
 for i in range(n - 1, 0, -1):
     item = eat[i]
-    ok_dishes |= items[item]
-    ok[i - 1] = m - len(ok_dishes)
-# print(ok)
-print(" ".join(list(map(str, ok))))
+    ng_dishes |= items[item]
+    ng[i - 1] = m - len(ng_dishes)
+# print(ng)
+print(" ".join(list(map(str, ng))))
