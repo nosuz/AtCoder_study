@@ -46,12 +46,13 @@ from collections import defaultdict
 
 n, m = map(int, input().split())
 
-mod = n / 2
+# mod = n / 2
 
 grp = defaultdict(lambda: 0)
 for _ in range(m):
     a, b = map(int, input().split())
-    ab = ((a + b) / 2) % mod
+    # ab = ((a + b) / 2) % mod
+    ab = (a + b) % n  # no need to divide by 2
     # ab = ((a + b - 2) / 2) % mod # = ((a - 1 + b - 1) / 2) % mod
     # print(f"({a}, {b}) -> {ab}")
     grp[ab] += 1
