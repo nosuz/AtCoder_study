@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import re
 import argparse
 import time
 
@@ -71,6 +72,7 @@ def scrape_and_save_all_tasks(contest_id_upper):
     driver.implicitly_wait(2)
 
     contest_id_lower = contest_id_upper.lower()
+    out_dir = re.sub(r'([A-Z])(\d)', r'\1_\2', contest_id_upper)
     # task_suffixes = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     task_suffixes = ['a', 'b', 'c', 'd']
     base_url = f'https://atcoder.jp/contests/{contest_id_lower}/tasks/'
@@ -84,8 +86,8 @@ def scrape_and_save_all_tasks(contest_id_upper):
             examples = extract_all_io_examples(driver, task_url)
             if examples:
                 save_examples_to_file(
-                    problem_id.upper(), examples, out_dir=contest_id_upper)
-                print(f' → {contest_id_upper}/{problem_id.upper()}.py に保存しました')
+                    problem_id.upper(), examples, out_dir)
+                print(f' → {out_dir}/{problem_id.upper()}.py に保存しました')
             else:
                 print(' → 入力例・出力例が見つかりませんでした')
         except Exception as e:
