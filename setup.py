@@ -5,9 +5,13 @@ import re
 import argparse
 import time
 
+TEMPLATE_DIR = os.path.dirname(__file__)
+TEMPLATE_NAME = "abc_template.py"
+
 try:
     from selenium import webdriver
     from bs4 import BeautifulSoup
+    from jinja2 import Template, FileSystemLoader, Environment
 except ModuleNotFoundError:
     print("venv is required. activated by the following command")
     print(" . atcoder/bin/activate")
@@ -34,7 +38,7 @@ def extract_all_io_examples(driver, url):
                 h3_output = parts[i + 1].find('h3')
                 pre_output = parts[i + 1].find('pre')
                 if h3_output and '出力例' in h3_output.text and pre_output:
-                    output_text = pre_output.text.strip()
+                    output_text = pre_output.text.strip().replace('\n', ' ')
                     examples.append((input_text, output_text))
                     i += 2
                     continue
@@ -43,18 +47,18 @@ def extract_all_io_examples(driver, url):
     return examples
 
 
-def save_examples_to_file(problem_id, examples, out_dir):
+def get_template(directory, template_name):
+    loader = FileSystemLoader(directory)
+    env = Environment(loader=loader)
+    return env.get_template(template_name)
+
+
+def save_examples_to_file(problem_id, examples, template, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     filename = os.path.join(out_dir, f'{problem_id}.py')
 
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write('"""TEST_DATA\n')
-        for input_text, output_text in examples:
-            excepted_text = output_text.strip().replace('\n', ' ')
-            f.write(f'{input_text}\n')
-            f.write('<expected>')
-            f.write(f' {excepted_text}\n\n')
-        f.write('"""\n\n')
+        f.write(template.render(examples=examples))
 
 
 def get_default_chrome_options():
@@ -64,6 +68,8 @@ def get_default_chrome_options():
 
 
 def scrape_and_save_all_tasks(contest_id_upper):
+    template = get_template(TEMPLATE_DIR, TEMPLATE_NAME)
+
     chrome_options = get_default_chrome_options()
     # chrome://version/
     chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
@@ -86,7 +92,7 @@ def scrape_and_save_all_tasks(contest_id_upper):
             examples = extract_all_io_examples(driver, task_url)
             if examples:
                 save_examples_to_file(
-                    problem_id.upper(), examples, out_dir)
+                    problem_id.upper(), examples, template, out_dir)
                 print(f' → {out_dir}/{problem_id.upper()}.py に保存しました')
             else:
                 print(' → 入力例・出力例が見つかりませんでした')
