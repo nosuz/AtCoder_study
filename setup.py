@@ -4,9 +4,11 @@ import os
 import re
 import argparse
 import time
+from datetime import datetime
 
 TEMPLATE_DIR = os.path.dirname(__file__)
-TEMPLATE_NAME = "abc_template.py"
+TEMPLATE_PROBLEM = "problem_template.py"
+TEMPLATE_README = "readme_template.md"
 
 try:
     from selenium import webdriver
@@ -18,7 +20,7 @@ except ModuleNotFoundError:
     exit()
 
 
-def extract_all_io_examples(driver, url):
+def extract_all_examples(driver, url):
     driver.get(url)
     time.sleep(2)
     response_html = driver.page_source
@@ -26,6 +28,7 @@ def extract_all_io_examples(driver, url):
 
     parts = soup.select('div.part')
     examples = []
+    title = driver.title
 
     i = 0
     while i < len(parts):
@@ -44,7 +47,7 @@ def extract_all_io_examples(driver, url):
                     continue
         i += 1
 
-    return examples
+    return {"title": title, "examples": examples}
 
 
 def get_template(directory, template_name):
@@ -61,6 +64,34 @@ def save_examples_to_file(problem_id, examples, template, out_dir):
         f.write(template.render(examples=examples))
 
 
+def get_contest_info(driver, contest_id_lower):
+    contest_url = f'https://atcoder.jp/contests/{contest_id_lower}'
+    driver.get(contest_url)
+    time.sleep(2)
+    response_html = driver.page_source
+    soup = BeautifulSoup(response_html, 'html.parser')
+
+    title = soup.select_one(
+        '#main-container > div.row > div:nth-child(2) > div.insert-participant-box > div.mb-2 > h1')
+
+    date_part = soup.select_one(
+        '#contest-nav-tabs > div > small.contest-duration > a:nth-child(1) > time')
+
+    date_str = re.sub(r'\(.+', '', date_part.get_text(strip=True))
+    print(date_str)
+    date = datetime.strptime(date_str, "%Y-%m-%d")
+
+    return {"title": title.get_text(strip=True), "date": date.strftime('%Y 年 %-m 月 %-d 日'), "url": contest_url}
+
+
+def create_readme(contents, template, out_dir):
+    os.makedirs(out_dir, exist_ok=True)
+    filename = os.path.join(out_dir, 'README.md')
+
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(template.render(contents=contents))
+
+
 def get_default_chrome_options():
     options = webdriver.ChromeOptions()
     options.add_argument("--no-sandbox")
@@ -68,7 +99,8 @@ def get_default_chrome_options():
 
 
 def scrape_and_save_all_tasks(contest_id_upper):
-    template = get_template(TEMPLATE_DIR, TEMPLATE_NAME)
+    template_problem = get_template(TEMPLATE_DIR, TEMPLATE_PROBLEM)
+    template_readme = get_template(TEMPLATE_DIR, TEMPLATE_README)
 
     chrome_options = get_default_chrome_options()
     # chrome://version/
@@ -78,26 +110,36 @@ def scrape_and_save_all_tasks(contest_id_upper):
     driver.implicitly_wait(2)
 
     contest_id_lower = contest_id_upper.lower()
+    contest_info = get_contest_info(driver, contest_id_lower)
+
     out_dir = re.sub(r'([A-Z])(\d)', r'\1_\2', contest_id_upper)
     # task_suffixes = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     task_suffixes = ['a', 'b', 'c', 'd']
     base_url = f'https://atcoder.jp/contests/{contest_id_lower}/tasks/'
 
+    problem_titles = []
     for suffix in task_suffixes:
         problem_id = f'{contest_id_lower}_{suffix}'
         task_url = base_url + problem_id
         print(f'取得中: {problem_id} ...')
 
         try:
-            examples = extract_all_io_examples(driver, task_url)
+            contents = extract_all_examples(driver, task_url)
+            problem_titles.append(contents["title"])
+            examples = contents["examples"]
             if examples:
                 save_examples_to_file(
-                    problem_id.upper(), examples, template, out_dir)
+                    problem_id.upper(), examples, template_problem, out_dir)
                 print(f' → {out_dir}/{problem_id.upper()}.py に保存しました')
             else:
                 print(' → 入力例・出力例が見つかりませんでした')
         except Exception as e:
             print(f'エラーが発生しました: {e}')
+
+    # make README
+    readme_contest = {"contest": contest_info["title"], "date": contest_info["date"],
+                      "url": contest_info["url"], "titles": problem_titles}
+    create_readme(readme_contest, template_readme, out_dir)
 
     # return to the first problem
     driver.get(base_url + f'{contest_id_lower}_{task_suffixes[0]}')
