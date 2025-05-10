@@ -22,12 +22,14 @@ n = int(input())
 a = list(map(int, input().split()))
 
 total = 0
-# for i in range(n - 1):
-#     total += a[i] * sum(a[i + 1:])
-# print(total)
 
-sum = 0
-for i in range(n - 1, 0, -1):
-    sum += a[i]
-    total += a[i-1] * sum
+# sum = 0
+# for i in range(n - 1, 0, -1):
+#     sum += a[i]
+#     total += a[i-1] * sum
+
+sum = sum(a)
+for i in range(0, n - 1):
+    sum -= a[i]
+    total += a[i] * sum
 print(total)

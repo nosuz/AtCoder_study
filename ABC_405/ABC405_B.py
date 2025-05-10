@@ -29,5 +29,4 @@ for i in range(n):
         if len(expected) == 0:
             print(n - i)
             exit()
-else:
-    print(0)
+print(0)
