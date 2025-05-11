@@ -113,8 +113,8 @@ def scrape_and_save_all_tasks(contest_id_upper):
     contest_info = get_contest_info(driver, contest_id_lower)
 
     out_dir = re.sub(r'([A-Z])(\d)', r'\1_\2', contest_id_upper)
-    # task_suffixes = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-    task_suffixes = ['a', 'b', 'c', 'd']
+    task_suffixes = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    # task_suffixes = ['a', 'b', 'c', 'd']
     base_url = f'https://atcoder.jp/contests/{contest_id_lower}/tasks/'
 
     problem_titles = []
