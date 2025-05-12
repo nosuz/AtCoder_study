@@ -28,6 +28,8 @@ python3 validate.py ABC_399/A.py
 ```python
 a = input()
 
+a = list(input()) # 文字列を文字配列にする
+
 print(a)
 ```
 
