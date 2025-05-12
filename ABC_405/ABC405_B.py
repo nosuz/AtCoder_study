@@ -30,3 +30,14 @@ for i in range(n):
             print(n - i)
             exit()
 print(0)
+
+# expected = [False for _ in range(m)]
+# # print(expected)
+# for i in range(n):
+#     tmp = a[i]
+#     if tmp <= m:
+#         expected[tmp - 1] = True
+#         if all(expected):
+#             print(n - i)
+#             exit()
+# print(0)

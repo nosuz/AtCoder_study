@@ -24,9 +24,14 @@
 
 全体の合計から引いていくほうが単純かな。
 
+さらにスマートな[@ila*o*](https://x.com/ila_o_/status/1921204887305564572)の解法。
+
 ## D - Escape Route
 
 非常口を目指すのではなく、非常口から一歩ずつ戻っていくイメージ。
 
+## E - Fruit Lineup
+
 ## F - Chord Crossing
 
+## G - Range Shuffle Query
