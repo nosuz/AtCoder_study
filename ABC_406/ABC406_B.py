@@ -16,11 +16,9 @@
 import math
 
 n, k = map(int, input().split())
-
 a = list(map(int, input().split()))
 
 display = 1
-
 for i in a:
     display *= i
     # print(display)
