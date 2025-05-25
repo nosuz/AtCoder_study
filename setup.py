@@ -12,6 +12,7 @@ TEMPLATE_README = "readme_template.md"
 
 try:
     from selenium import webdriver
+    from webdriver_manager.chrome import ChromeDriverManager
     from bs4 import BeautifulSoup
     from jinja2 import Template, FileSystemLoader, Environment
 except ModuleNotFoundError:
@@ -106,7 +107,8 @@ def scrape_and_save_all_tasks(contest_id_upper):
     # chrome://version/
     chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
 
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(service=webdriver.ChromeService(
+        ChromeDriverManager().install()), options=chrome_options)
     driver.implicitly_wait(2)
 
     contest_id_lower = contest_id_upper.lower()
