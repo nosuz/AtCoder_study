@@ -97,6 +97,15 @@ def create_readme(contents, template, out_dir):
         f.write(template.render(contents=contents))
 
 
+def create_gitignore(problem_files, out_dir):
+    os.makedirs(out_dir, exist_ok=True)
+    filename = os.path.join(out_dir, '.gitignore')
+
+    with open(filename, "w", encoding="utf-8") as f:
+        for problem_file in problem_files:
+            f.write(f"# {problem_file}\n")
+
+
 def get_default_chrome_options():
     options = webdriver.ChromeOptions()
     options.add_argument("--no-sandbox")
@@ -140,6 +149,7 @@ def scrape_and_save_all_tasks(contest_id_upper):
     base_url = f'https://atcoder.jp/contests/{contest_id_lower}/tasks/'
 
     problem_titles = []
+    problem_files = []
     for suffix in task_suffixes:
         problem_id = f'{contest_id_lower}_{suffix}'
         task_url = base_url + problem_id
@@ -150,13 +160,18 @@ def scrape_and_save_all_tasks(contest_id_upper):
             problem_titles.append(contents["title"])
             examples = contents["examples"]
             if examples:
+                problem_file = f'{problem_id.upper()}.py'
                 save_examples_to_file(
                     problem_id.upper(), examples, template_problem, out_dir)
-                print(f' → {out_dir}/{problem_id.upper()}.py に保存しました')
+                print(f' → {out_dir}/{problem_file} に保存しました')
+                problem_files.append(problem_file)
             else:
                 print(' → 入力例・出力例が見つかりませんでした')
         except Exception as e:
             print(f'エラーが発生しました: {e}')
+
+    # write .gitignore
+    create_gitignore(problem_files, out_dir)
 
     # make README
     readme_contest = {"contest": contest_info["title"], "date": contest_info["date"],
