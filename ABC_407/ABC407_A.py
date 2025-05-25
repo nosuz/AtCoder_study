@@ -14,8 +14,10 @@
 
 """
 
-import math
+# import math
 
 a, b = map(int, input().split())
 
-print(math.floor(a / b + 0.5))
+# print(math.floor(a / b + 0.5))
+# expected to fail, but round() worked.
+print(round(a / b))
