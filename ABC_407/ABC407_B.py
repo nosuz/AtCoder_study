@@ -25,4 +25,8 @@ for x_i in range(1, 7):
             comb.add(f"{x_i}, {y_i}")
             pass
 # print(comb)
-print(len(comb) * ((1/6) ** 2))
+if len(comb) == 0:
+    # this is not required if 0.0 is acceptable.
+    print(0)
+else:
+    print(len(comb) * ((1/6) ** 2))

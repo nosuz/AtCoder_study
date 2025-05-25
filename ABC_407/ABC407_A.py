@@ -11,7 +11,9 @@
 22 11
 <expected> 2
 
+
 """
+
 import math
 
 a, b = map(int, input().split())
