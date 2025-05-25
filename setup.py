@@ -15,6 +15,10 @@ try:
     from webdriver_manager.chrome import ChromeDriverManager
     from bs4 import BeautifulSoup
     from jinja2 import Template, FileSystemLoader, Environment
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.common.by import By
+    from selenium.common.exceptions import TimeoutException
 except ModuleNotFoundError:
     print("venv is required. activated by the following command")
     print(" . atcoder/bin/activate")
@@ -111,6 +115,22 @@ def scrape_and_save_all_tasks(contest_id_upper):
         ChromeDriverManager().install()), options=chrome_options)
     driver.implicitly_wait(2)
 
+    # wait login
+    top_page = "https://atcoder.jp/home"
+    driver.get(top_page)
+    try:
+        # 10秒間待って、見つからなければ例外
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "span.user-gray.bold"))
+        )
+    except TimeoutException:
+        home = os.environ["HOME"]
+        print("Login is required by the user. Exec the next command and login")
+        print(
+            f"google-chrome --user-data-dir={home}/reposit/google-chrome-config --profile-directory=Default")
+        exit()
+
     contest_id_lower = contest_id_upper.lower()
     contest_info = get_contest_info(driver, contest_id_lower)
 
@@ -153,13 +173,10 @@ if __name__ == '__main__':
     parser.add_argument('contest_id', help='対象のコンテストID（例: abc402 や ABC402）')
     args = parser.parse_args()
 
-    print("Close all Chrome browsers.")
-    print("Then hit 'Enter'. New Chrome browser will be start for Selenium.")
-
-    print()
-    input("Hit 'Enter' when confirmed all Chrome are closed.")
-    os.system("google-chrome --remote-debugging-port=9222 2> /dev/null&")
+    # debugging-port option doesn't work anymore if the profile is under default config directory.
+    home = os.environ["HOME"]
+    os.system(
+        f"google-chrome --remote-debugging-port=9222 --user-data-dir={home}/reposit/google-chrome-config --profile-directory=Default 2> /dev/null&")
     time.sleep(3)
-
     contest_id_upper = args.contest_id.upper()
     scrape_and_save_all_tasks(contest_id_upper)
