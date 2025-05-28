@@ -17,13 +17,12 @@
 x, y = map(int, input().split())
 
 comb = set()
-for x_i in range(1, 7):
-    for y_i in range(1, 7):
-        if (x_i + y_i) >= x:
-            comb.add(f"{x_i}, {y_i}")
-        elif abs(x_i - y_i) >= y:
-            comb.add(f"{x_i}, {y_i}")
-            pass
+for a in range(1, 7):
+    for b in range(1, 7):
+        if (a + b) >= x:
+            comb.add(f"{a}, {b}")
+        elif abs(a - b) >= y:
+            comb.add(f"{a}, {b}")
 # print(comb)
 if len(comb) == 0:
     # this is not required if 0.0 is acceptable.
