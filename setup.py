@@ -6,23 +6,52 @@ import argparse
 import time
 from datetime import datetime
 
+from selenium import webdriver
+from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+
+import configparser
+from bs4 import BeautifulSoup
+from jinja2 import FileSystemLoader, Environment
+
 TEMPLATE_DIR = os.path.dirname(__file__)
 TEMPLATE_PROBLEM = "problem_template.py"
 TEMPLATE_README = "readme_template.md"
 
-try:
-    from selenium import webdriver
-    from webdriver_manager.chrome import ChromeDriverManager
-    from bs4 import BeautifulSoup
-    from jinja2 import Template, FileSystemLoader, Environment
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.common.by import By
-    from selenium.common.exceptions import TimeoutException
-except ModuleNotFoundError:
-    print("venv is required. activated by the following command")
-    print(" . atcoder/bin/activate")
-    exit()
+PROFILE_NAME = 'selenium'
+
+
+def find_profile_path(profile_name: str) -> str:
+    ini_path = os.path.expanduser("~/.mozilla/firefox/profiles.ini")
+    config = configparser.ConfigParser()
+    config.read(ini_path)
+
+    for section in config.sections():
+        if config.has_option(section, "Name") and config.get(section, "Name") == profile_name:
+            relative = config.getboolean(section, "IsRelative")
+            path = config.get(section, "Path")
+            return os.path.expanduser(f"~/.mozilla/firefox/{path}") if relative else path
+
+    raise FileNotFoundError(f"Firefox profile '{profile_name}' not found.")
+
+
+def is_profile_locked(profile_path: str) -> bool:
+    lock_file = os.path.join(profile_path, ".parentlock")
+    if not os.path.exists(lock_file):
+        return False
+
+    try:
+        with open(lock_file, 'r') as f:
+            pid = int(f.read().strip())
+        os.kill(pid, 0)  # プロセス存在チェック（PermissionError の場合も生きている）
+        return True
+    except Exception:
+        return False
 
 
 def extract_all_examples(driver, url):
@@ -106,39 +135,32 @@ def create_gitignore(problem_files, out_dir):
             f.write(f"# {problem_file}\n")
 
 
-def get_default_chrome_options():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--no-sandbox")
+def get_default_browser_options():
+    options = Options()
+    # options.add_argument("--no-sandbox")
     return options
 
 
-def scrape_and_save_all_tasks(contest_id_upper):
+def scrape_and_save_all_tasks(driver, contest_id_upper):
+    driver.implicitly_wait(2)
+
     template_problem = get_template(TEMPLATE_DIR, TEMPLATE_PROBLEM)
     template_readme = get_template(TEMPLATE_DIR, TEMPLATE_README)
-
-    chrome_options = get_default_chrome_options()
-    # chrome://version/
-    chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
-
-    driver = webdriver.Chrome(service=webdriver.ChromeService(
-        ChromeDriverManager().install()), options=chrome_options)
-    driver.implicitly_wait(2)
 
     # wait login
     top_page = "https://atcoder.jp/home"
     driver.get(top_page)
     try:
-        # 10秒間待って、見つからなければ例外
-        WebDriverWait(driver, 10).until(
+        # 5秒間待って、見つからなければ例外
+        WebDriverWait(driver, 5).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, "span.user-gray.bold"))
         )
     except TimeoutException:
-        home = os.environ["HOME"]
-        print("Login is required by the user. Exec the next command and login")
-        print(
-            f"google-chrome --user-data-dir={home}/reposit/google-chrome-config --profile-directory=Default")
-        exit()
+        driver.save_screenshot('atcoder_login.png')
+        print("Login is required by the user.")
+        print("firefox -p selenium")
+        return
 
     contest_id_lower = contest_id_upper.lower()
     contest_info = get_contest_info(driver, contest_id_lower)
@@ -178,20 +200,43 @@ def scrape_and_save_all_tasks(contest_id_upper):
                       "url": contest_info["url"], "problems": problems}
     create_readme(readme_content, template_readme, out_dir)
 
-    # return to the first problem
-    driver.get(base_url + f'{contest_id_lower}_{task_suffixes[0]}')
-    driver.quit()
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='AtCoder問題の入力例と出力例を収集します。')
     parser.add_argument('contest_id', help='対象のコンテストID（例: abc402 や ABC402）')
     args = parser.parse_args()
 
-    # debugging-port option doesn't work anymore if the profile is under default config directory.
-    home = os.environ["HOME"]
-    os.system(
-        f"google-chrome --remote-debugging-port=9222 --user-data-dir={home}/reposit/google-chrome-config --profile-directory=Default 2> /dev/null&")
-    time.sleep(3)
+    try:
+        profile_path = find_profile_path(PROFILE_NAME)
+        if is_profile_locked(profile_path):
+            print(f"⚠️ Profile '{PROFILE_NAME}' is currently in use.")
+        else:
+            print(
+                f"✅ Profile '{PROFILE_NAME}' is available. Launching Firefox...")
+            # GeckoDriverを自動的にダウンロード
+            service = Service(executable_path=GeckoDriverManager().install())
+
+            browser_options = get_default_browser_options()
+            browser_options.add_argument("--headless")
+            # browser_options.add_argument('--no-sandbox')
+            # browser_options.add_argument('--disable-dev-shm-usage')
+            # browser_options.add_argument('--disable-extensions')
+            # browser_options.add_argument('--width=1200')
+            # browser_options.add_argument('--height=800')
+            # browser_options.add_argument('--log-level=3')
+
+            # https://selenium-world.net/selenium-tips/3586/
+            # firefox -p selenium
+            browser_profile = webdriver.FirefoxProfile(profile_path)
+            browser_options.profile = browser_profile
+
+            driver = webdriver.Firefox(
+                service=service, options=browser_options)
+    except Exception as e:
+        print(f"❌ Error: {e}")
+
     contest_id_upper = args.contest_id.upper()
-    scrape_and_save_all_tasks(contest_id_upper)
+    scrape_and_save_all_tasks(driver, contest_id_upper)
+
+    driver.quit()
+    print("ブラウザを閉じました。")

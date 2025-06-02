@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        PASSWD: ${PASSWD:-}
+    volumes:
+      - ..:/workspaces
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - web_driver:/home/vscode/.wdm
+      - firefox_profile:/home/vscode/.mozilla
+    container_name: atcoder
+    environment:
+      - LANG=ja_JP.UTF-8
+    privileged: true
+    stdin_open: true
+    tty: true
+    shm_size: 512m
+volumes:
+  web_driver:
+  firefox_profile:
