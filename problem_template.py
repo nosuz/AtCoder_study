@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
 # python3 validate.py sample.py
+
+# {{problem_url}}
+
 """TEST_DATA
 {% for example in examples %}{{example.0}}
 <expected> {{example.1}}

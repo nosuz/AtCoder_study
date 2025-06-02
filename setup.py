@@ -61,12 +61,12 @@ def get_template(directory, template_name):
     return env.get_template(template_name)
 
 
-def save_examples_to_file(problem_id, examples, template, out_dir):
+def save_examples_to_file(problem_id, url, examples, template, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     filename = os.path.join(out_dir, f'{problem_id}.py')
 
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write(template.render(examples=examples))
+        f.write(template.render(examples=examples, problem_url=url))
 
 
 def get_contest_info(driver, contest_id_lower):
@@ -148,7 +148,7 @@ def scrape_and_save_all_tasks(contest_id_upper):
     # task_suffixes = ['a', 'b', 'c', 'd']
     base_url = f'https://atcoder.jp/contests/{contest_id_lower}/tasks/'
 
-    problem_titles = []
+    problems = []
     problem_files = []
     for suffix in task_suffixes:
         problem_id = f'{contest_id_lower}_{suffix}'
@@ -157,12 +157,12 @@ def scrape_and_save_all_tasks(contest_id_upper):
 
         try:
             contents = extract_all_examples(driver, task_url)
-            problem_titles.append(contents["title"])
+            problems.append({"title": contents["title"], "url": task_url})
             examples = contents["examples"]
             if examples:
                 problem_file = f'{problem_id.upper()}.py'
                 save_examples_to_file(
-                    problem_id.upper(), examples, template_problem, out_dir)
+                    problem_id.upper(), task_url, examples, template_problem, out_dir)
                 print(f' → {out_dir}/{problem_file} に保存しました')
                 problem_files.append(problem_file)
             else:
@@ -174,9 +174,9 @@ def scrape_and_save_all_tasks(contest_id_upper):
     create_gitignore(problem_files, out_dir)
 
     # make README
-    readme_contest = {"contest": contest_info["title"], "date": contest_info["date"],
-                      "url": contest_info["url"], "titles": problem_titles}
-    create_readme(readme_contest, template_readme, out_dir)
+    readme_content = {"contest": contest_info["title"], "date": contest_info["date"],
+                      "url": contest_info["url"], "problems": problems}
+    create_readme(readme_content, template_readme, out_dir)
 
     # return to the first problem
     driver.get(base_url + f'{contest_id_lower}_{task_suffixes[0]}')

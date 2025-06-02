@@ -6,6 +6,6 @@
 
 [{{contents.contest}}]({{contents.url}})
 
-{% for title in contents.titles %}## {{title}}
+{% for problem in contents.problems %}## [{{problem.title}}]({{problem.url}})
 
 {% endfor %}
