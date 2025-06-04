@@ -46,9 +46,9 @@ def run_prog_with_data(prog_name, data):
             break
         elif expected_answer:
             if stdout == expected_answer:
-                print("OK")
+                print("✅ OK")
             else:
-                print(f"WA, expected: {expected_answer}")
+                print(f"❌ WA, expected: {expected_answer}")
         print()
 
 
