@@ -59,8 +59,8 @@ RUN apt-get update \
     python3 python3-dev python3-venv python-is-python3 \
     firefox dbus-x11 fonts-noto-cjk
 
-COPY .devcontainer/start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+COPY .devcontainer/init-docker-volume.sh /usr/local/bin/init-docker-volume.sh
+RUN chmod +x /usr/local/bin/init-docker-volume.sh
 
 # change user. Exec as vscode after this directive.
 USER vscode
@@ -83,4 +83,4 @@ EOF
 # $HOME is not expand in ENV
 ENV PATH="/home/vscode/venv/bin:$PATH"
 
-CMD ["/usr/local/bin/start.sh"]
+CMD ["/usr/local/bin/init-docker-volume.sh"]
