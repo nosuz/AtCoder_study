@@ -3,10 +3,6 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
-        PASSWD: ${PASSWD:-}
     volumes:
       - ..:/workspaces
       - /tmp/.X11-unix:/tmp/.X11-unix

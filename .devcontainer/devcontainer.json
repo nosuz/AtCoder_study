@@ -1,7 +1,6 @@
 {
   "name": "AtCoder",
   "workspaceFolder": "/workspaces",
-  // UID and GID is imported from .env file.
   "dockerComposeFile": "compose.yaml",
   "service": "app",
   // Features to add to the dev container. More info: https://containers.dev/features.
