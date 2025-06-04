@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
 # python3 validate.py sample.py
+
+# https://atcoder.jp/contests/abc408/tasks/abc408_b
+
 """TEST_DATA
 4
 3 1 4 1
