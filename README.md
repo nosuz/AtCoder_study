@@ -6,6 +6,19 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 
 Dev Container になっています。このレポジトリをクローンして VSCode で開き、コマンドパレットから`Dev Containers: Rebuild Container`を実行すると Python 環境の他、問題の入出力例を取得するプログラムが使えるようになります。
 
+もしローカルの UID と GID が次の表と異なる場合は、次のいずれかのコマンドを実行してローカルの ID がコンテナに反映されるようにしてください。この操作がないと、docker image の作成に時間がかかり、作成された image のサイズも大きくなります。
+
+|     | ID   |
+| --- | ---- |
+| UID | 1000 |
+| GID | 1000 |
+
+```
+bash .devcontainer/generate_env.sh
+# or
+python .devcontainer/generate_env.py
+```
+
 ## 問題の入力例と出力例の収集
 
 各問題の入力と出力例は、次のコマンドで収集して、コメントとして埋め込んだ解答プログラムのテンプレートを作成します。
