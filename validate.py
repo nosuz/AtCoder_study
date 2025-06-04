@@ -25,7 +25,7 @@ def run_prog_with_data(prog_name, data):
     blocks = data.strip().split("\n\n")  # Split into blocks by empty lines
     for index, block in enumerate(blocks):
         # skip not specified sample
-        if args.limit and not index in args.limit:
+        if args.limit and not index in [i - 1 for i in args.limit]:
             continue
 
         try:
@@ -34,13 +34,13 @@ def run_prog_with_data(prog_name, data):
         except ValueError:
             input_data = block
             expected_answer = None
-        print(f"Input {index}")
+        print(f"Input {index + 1}")
         print(input_data)
         process = subprocess.Popen(["python3", prog_name], stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         stdout, stderr = process.communicate(input=input_data)
         stdout = stdout.strip().replace('\n', ' ')
-        print(f"Output {index}")
+        print(f"Output {index + 1}")
         print(stdout, stderr)
         if process.returncode != 0:
             break
