@@ -50,5 +50,4 @@ for v in wall:
     temp += v
     result.append(temp)
 # print(result)
-# ソートして最小値を先頭に持ってくる。
-print(sorted(result[0:-1])[0])
+print(min(result[0:-1]))
