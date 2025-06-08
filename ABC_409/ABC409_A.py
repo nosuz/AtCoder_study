@@ -28,8 +28,14 @@ n = int(input())
 t = list(input())
 a = list(input())
 
-for x, y in zip(t, a):
-    if (x == 'o') and (y == 'o'):
+# for x, y in zip(t, a):
+#     if (x == 'o') and (y == 'o'):
+#         print("Yes")
+#         exit()
+# print("No")
+
+for i in range(n):
+    if (t[i] == 'o') and (a[i] == 'o'):
         print("Yes")
         exit()
 print("No")
