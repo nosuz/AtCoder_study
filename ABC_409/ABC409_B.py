@@ -16,6 +16,10 @@
 4
 1 3 3 3
 <expected> 3
+
+2
+100 101
+<expected> 2
 """
 
 n = int(input())
