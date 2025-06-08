@@ -35,12 +35,15 @@ for x in d:
     prev += x
 # print(points)
 
+# should 3の倍数
+if (l % 3) != 0:
+    print(0)
+    exit()
+
 total = 0
 delta = l // 3
 for i in range(0, delta):
     if (i in points) and ((i + delta) in points) and ((i + 2*delta) in points):
-        # confirm triangle. square leads wrong answer. 4//3 = 1 and make (0, 1, 2) and (2 + 4//3) != 0
-        if i == (i + 3*delta) % l:
-            # print(points[i], points[i + l//3], points[i + 2*(l)//3])
-            total += points[i] * points[i + delta] * points[i + 2*delta]
+        # print(points[i], points[i + l//3], points[i + 2*(l)//3])
+        total += points[i] * points[i + delta] * points[i + 2*delta]
 print(total)
