@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 
 # python3 validate.py sample.py
+
+# A - Approximation
+# https://atcoder.jp/contests/abc407/tasks/abc407_a
+
 """TEST_DATA
 4 7
 <expected> 1

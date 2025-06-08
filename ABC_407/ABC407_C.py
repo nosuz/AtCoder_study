@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 
 # python3 validate.py sample.py
+
+# C - Security 2
+# https://atcoder.jp/contests/abc407/tasks/abc407_c
+
 """TEST_DATA
 21
 <expected> 4

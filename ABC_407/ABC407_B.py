@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 
 # python3 validate.py sample.py
+
+# B - P(X or Y)
+# https://atcoder.jp/contests/abc407/tasks/abc407_b
+
 """TEST_DATA
 9 3
 <expected> 0.555555555555555555555555555555
