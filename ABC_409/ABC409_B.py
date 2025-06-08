@@ -20,25 +20,40 @@
 2
 100 101
 <expected> 2
+
+1
+0
+<expected> 0
+
+2
+0 1
+<expected> 1
+
 """
+
+from collections import defaultdict
 
 n = int(input())
 a = list(map(int, input().split()))
 
-a.sort()
-
-prev = -1
+d = defaultdict(lambda: 0)
 for i in range(len(a)):
-    if a[i] == prev:
-        continue
+    d[a[i]] += 1
+# print(d)
 
-    if a[i] > (n - i):
-        for x in range(a[i] - 1, prev, -1):
-            if x <= (n - i):
-                print(x)
-                exit()
-        print(prev)
+for x in range(101):
+    count = 0
+    for k, v in d.items():
+        if k >= x:
+            count += v
+    # print(x, count)
+    if count < x:
+        # 条件を満たさない。一つ前は満たしていたはず。
+        print(x-1)
         exit()
+# LTE debug
+# while True:
+#     continue
 
-    prev = a[i]
-print(a[-1])
+# x = 100でも条件を満たしている
+print(100)
