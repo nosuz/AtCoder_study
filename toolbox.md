@@ -23,7 +23,7 @@ contest
 python3 validate.py ABC_399/A.py
 ```
 
-### 標準入力から読み込み
+### 標準入力から文字列を読み込み
 
 ```python
 a = input()
@@ -71,17 +71,96 @@ l = list(map(int, input().split()))
 print(l)
 ```
 
-### リストをソートする
+## ソートする
+
+### List Tuple
 
 ```python
 l = [(87, 0), (87, 1), (87, 2), (88, 3), (41, 4), (38, 5), (41, 6), (38, 7)]
 
-sorted_l = sorted(l, reverse=False, key=lambda x: x[1]):
+sorted_l = sorted(l, reverse=False, key=lambda x: x[1])
 # reverseがTのときは、max to minになる。
 ```
 
-### プログラムを終了させる
+### Dict
+
+```python
+l = [{"key1": 1, "key2": 2}, {"key1": 4, "key2": 5}, {"key1": 3, "key2": 2}, {"key1": 10, "key2": 1}]
+
+sorted_l = sorted(l, reverse=False, key=lambda x: x["key2"])
+# reverseがTのときは、max to minになる。
+```
+
+## プログラムを終了させる
 
 ```python
 exit()
+```
+
+## 文字列
+
+### 文字コード
+
+```python
+# 文字コード
+code = ord("@")
+print(code)
+
+code = ord(" ")
+print(f"0x{code:x}")
+
+# 数値から文字
+char1 = chr(0x20)
+char2 = chr(64)
+print(f"-{char1}-{char2}-")
+
+```
+
+## List型
+
+```python
+str = list("01234567")
+
+print(str[:1])
+# ['0']
+print(str[0:2])
+# ['0', '1']
+
+```
+
+## Dict型
+
+### defaultdict
+
+初期化無しで使用できるDict型
+
+```python
+from collections import defaultdict
+
+d = defaultdict(lambda: 0)
+d["a"] += 1
+d["b"] = 1
+print(d)
+```
+
+### each
+
+```python
+my_dict = {'apple': 1, 'banana': 2, 'cherry': 3}
+
+for key, value in my_dict.items():
+    print(f"キー: {key}, 値: {value}")
+```
+
+## for-else block
+
+```python
+for i in range(10):
+    if i > 5:
+        break
+else:
+    print("no break only")
+    # continue in double for
+print(i)
+
 ```
