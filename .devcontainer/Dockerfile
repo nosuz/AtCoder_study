@@ -39,7 +39,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-    software-properties-common
+    software-properties-common \
+    && apt-get clean \
+    && rm -rf /var/lib/apt-get/lists/*
 RUN add-apt-repository -y ppa:mozillateam/ppa
 
 # set up choose apt over snap
@@ -57,7 +59,9 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     git ssh \
     python3 python3-dev python3-venv python-is-python3 \
-    firefox dbus-x11 fonts-noto-cjk
+    firefox dbus-x11 fonts-noto-cjk \
+    && apt-get clean \
+    && rm -rf /var/lib/apt-get/lists/*
 
 COPY .devcontainer/init-docker-volume.sh /usr/local/bin/init-docker-volume.sh
 RUN chmod +x /usr/local/bin/init-docker-volume.sh
