@@ -2,10 +2,11 @@
 
 # python3 validate.py sample.py
 
-# {{problem_url}}
+# {{contents.title}}
+# {{contents.url}}
 
 """TEST_DATA
-{% for example in examples %}{{example.0}}
+{% for example in contents.examples %}{{example.0}}
 <expected> {{example.1}}
 
 {% endfor %}

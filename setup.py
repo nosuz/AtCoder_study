@@ -81,7 +81,7 @@ def extract_all_examples(driver, url):
                     continue
         i += 1
 
-    return {"title": title, "examples": examples}
+    return {"title": title, "examples": examples, "url": url}
 
 
 def get_template(directory, template_name):
@@ -90,12 +90,12 @@ def get_template(directory, template_name):
     return env.get_template(template_name)
 
 
-def save_examples_to_file(problem_id, url, examples, template, out_dir):
+def save_examples_to_file(problem_id, contents, template, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     filename = os.path.join(out_dir, f'{problem_id}.py')
 
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write(template.render(examples=examples, problem_url=url))
+        f.write(template.render(contents=contents))
 
 
 def get_contest_info(driver, contest_id_lower):
@@ -179,12 +179,13 @@ def scrape_and_save_all_tasks(driver, contest_id_upper):
 
         try:
             contents = extract_all_examples(driver, task_url)
-            problems.append({"title": contents["title"], "url": task_url})
+            problems.append(contents)
             examples = contents["examples"]
             if examples:
                 problem_file = f'{problem_id.upper()}.py'
+
                 save_examples_to_file(
-                    problem_id.upper(), task_url, examples, template_problem, out_dir)
+                    problem_id.upper(), contents, template_problem, out_dir)
                 print(f' → {out_dir}/{problem_file} に保存しました')
                 problem_files.append(problem_file)
             else:
