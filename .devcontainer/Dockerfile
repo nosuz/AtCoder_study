@@ -1,5 +1,7 @@
-# syntax=docker/dockerfile:1.4
+# syntax=docker/dockerfile:1
 FROM ubuntu:latest
+# suppress clear apt cache
+RUN rm /etc/apt/apt.conf.d/docker-clean
 
 ENV LANG=ja_JP.UTF-8
 #ENV LC_ALL=ja_JP.UTF-8
@@ -23,10 +25,10 @@ RUN set -eux; \
     useradd --uid "${UID}" --gid "${GID}" -s /bin/bash -m "${USERNAME}"
 
 # enable sudo
-RUN apt-get update \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,sharing=locked,target=/var/lib/apt \
+    apt-get update \
     && apt-get install -y sudo \
-    && apt-get clean \
-    && rm -rf /var/lib/apt-get/lists/* \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
@@ -37,12 +39,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Fixed to install from not snap but apt
 # https://linux-jp.org/?p=5455
 
-RUN apt-get update \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,sharing=locked,target=/var/lib/apt \
+    apt-get update \
     && apt-get install --no-install-recommends -y \
     software-properties-common \
-    && apt-get clean \
-    && rm -rf /var/lib/apt-get/lists/*
-RUN add-apt-repository -y ppa:mozillateam/ppa
+    && add-apt-repository -y ppa:mozillateam/ppa
 
 # set up choose apt over snap
 RUN cat <<EOF > /etc/apt/preferences.d/mozilla-firefox
@@ -55,13 +57,13 @@ Pin: version 1:1snap1-0ubuntu2
 Pin-Priority: -1
 EOF
 
-RUN apt-get update \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,sharing=locked,target=/var/lib/apt \
+    apt-get update \
     && apt-get install --no-install-recommends -y \
     git ssh \
     python3 python3-dev python3-venv python-is-python3 \
-    firefox dbus-x11 fonts-noto-cjk \
-    && apt-get clean \
-    && rm -rf /var/lib/apt-get/lists/*
+    firefox dbus-x11 fonts-noto-cjk
 
 COPY .devcontainer/init-docker-volume.sh /usr/local/bin/init-docker-volume.sh
 RUN chmod +x /usr/local/bin/init-docker-volume.sh
@@ -70,9 +72,13 @@ RUN chmod +x /usr/local/bin/init-docker-volume.sh
 USER vscode
 
 COPY requirements.txt .
-RUN python3 -m venv $HOME/venv && \
-    $HOME/venv/bin/pip install --upgrade pip && \
-    $HOME/venv/bin/pip install --no-cache-dir -r requirements.txt
+ARG PIP_CACHE_DIR=/home/vscode/.cache/pip
+RUN mkdir -p $PIP_CACHE_DIR
+RUN --mount=type=cache,target=/home/vscode/.cache/pip \
+    sudo chown vscode:vscode /home/vscode/.cache/pip \
+    && python3 -m venv $HOME/venv \
+    && $HOME/venv/bin/pip install --upgrade pip \
+    && $HOME/venv/bin/pip install -r requirements.txt
 
 # activate venv for Pylance
 RUN cat <<EOF >> /home/vscode/.bashrc
