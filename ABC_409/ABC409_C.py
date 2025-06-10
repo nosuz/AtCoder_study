@@ -20,18 +20,19 @@
 
 """
 
+from collections import defaultdict
+
 n, l = map(int, input().split())
 d = list(map(int, input().split()))
 
-points = {0: 1}
+points = defaultdict(lambda: 0)
+points[0] = 1
+
 # 余りを考える時は、0スタートが吉。
 prev = 0
 for x in d:
     y = (prev + x) % l
-    if y in points:
-        points[y] += 1
-    else:
-        points[y] = 1
+    points[y] += 1
     prev += x
 # print(points)
 
@@ -44,6 +45,6 @@ total = 0
 delta = l // 3
 for i in range(0, delta):
     if (i in points) and ((i + delta) in points) and ((i + 2*delta) in points):
-        # print(points[i], points[i + l//3], points[i + 2*(l)//3])
+        # print(points[i], points[i + delta], points[i + 2*delta])
         total += points[i] * points[i + delta] * points[i + 2*delta]
 print(total)
