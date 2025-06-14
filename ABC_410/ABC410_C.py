@@ -40,4 +40,6 @@ for _ in range(q):
             print(a[p])
         case 3:
             k = q[1]
-            head = (head + k) % n
+            # head = (head + k) % n
+            # max(head) = 3*10^14 < 2^64
+            head += k
