@@ -31,7 +31,7 @@ for i in x:
     if i == 0:
         min_v = box_count[0]
         min_p = 0
-        for j in range(n):
+        for j in range(1, n):
             if box_count[j] < min_v:
                 min_p = j
                 min_v = box_count[j]
