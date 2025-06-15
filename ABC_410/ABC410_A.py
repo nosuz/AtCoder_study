@@ -28,9 +28,12 @@ n = int(input())
 a = list(map(int, input().split()))
 k = int(input())
 
-count = 0
+# count = 0
 
-for i in a:
-    if i >= k:
-        count += 1
-print(count)
+# for i in a:
+#     if i >= k:
+#         count += 1
+# print(count)
+
+entry = [True if i >= k else False for i in a]
+print(sum(entry))
