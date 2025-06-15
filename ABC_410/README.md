@@ -8,15 +8,29 @@
 
 ## [A - G1](https://atcoder.jp/contests/abc410/tasks/abc410_a)
 
+単純に\(K\)以上の\(A_i\)の数を数えた。
+
+出場可能かの配列に変換して、出場可能な数を数えても良かった。
+
 ## [B - Reverse Proxy](https://atcoder.jp/contests/abc410/tasks/abc410_b)
+
+\(0\)の場合は、B問題なので深く考えずに頭らかループして最小の箱を探す。
+
+2個めの\(0\)の場合は、1つ目に入れた場所と値を覚えておけば、探す箱の数を減らせたかも。その代わり条件を満たす場所がなかった時には再度全スキャンが必要になるので、毎回全スキャン1回とどっちが速いかな。
 
 ## [C - Rotatable Array](https://atcoder.jp/contests/abc410/tasks/abc410_c)
 
+実際に配列を組み替えていると二重ループになり時間制限を満たせない。リングバッファーのようにローテートした結果先頭となる位置を覚えておく。
+
+先頭となる位置の値は、\(\max K \times \max Q = 3 \times 10^{14}\)となり\(2^{64}\)よりも小さいので\(3\)の操作毎に\(\mod K\)する必要はない。
+
+
 ## [D - XOR Shortest Walk](https://atcoder.jp/contests/abc410/tasks/abc410_d)
+
+[解説](https://atcoder.jp/contests/abc410/editorial/13208)にある頂点倍化ってなんですか？
 
 ## [E - Battles in a Row](https://atcoder.jp/contests/abc410/tasks/abc410_e)
 
 ## [F - Balanced Rectangles](https://atcoder.jp/contests/abc410/tasks/abc410_f)
 
 ## [G - Longest Chord Chain](https://atcoder.jp/contests/abc410/tasks/abc410_g)
-
