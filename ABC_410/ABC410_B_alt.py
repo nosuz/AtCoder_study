@@ -18,26 +18,30 @@
 4 6 0 3 4 2 6 5 2 3 0 3 2 5 0 3 5 0 2 0
 <expected> 4 6 1 3 4 2 6 5 2 3 1 3 2 5 1 3 5 4 2 6
 
+1 3
+1 0 0
+<expected>1 1 1
 
+2 4
+0 0 0 0
+<expected>1 2 1 2
 """
 
 
 def full_scan(box):
+    candidate = [0]
+
     p = 0
-    p_v = box[p]
+    v = box[p]
     for i in range(1, len(box)):
-        if box[i] < p_v:
+        if box[i] < v:
             p = i
-            p_v = box[i]
-    return p, p_v
-
-
-def scan_same(box, p, v):
-    found = False
-    for i in range(p, len(box)):
-        if box[i] == v:
-            return True, i
-    return False, 0
+            v = box[i]
+            # reset
+            candidate = [i]
+        elif box[i] == v:
+            candidate.append(i)
+    return candidate
 
 
 n, q = map(int, input().split())
@@ -46,30 +50,21 @@ x = list(map(int, input().split()))
 box_count = [0 for _ in range(n)]
 box_q = []
 
-had_zero = False
-min_p = 0
-min_v = box_count[min_p]
+candidate = []
+
 for i in x:
     if i == 0:
-        if had_zero:
-            result, min_p = scan_same(box_count, min_p, min_v)
-            if result:
-                # found
-                box_count[min_p] += 1
-                box_q.append(min_p + 1)
-            else:
-                min_p, min_v = full_scan(box_count)
-                box_count[min_p] += 1
-                box_q.append(min_p + 1)
+        if len(candidate) == 0:
+            candidate = full_scan(box_count)
 
-        else:
-            had_zero = True
-
-            min_p, min_v = full_scan(box_count)
-            box_count[min_p] += 1
-            box_q.append(min_p + 1)
+        min_p = candidate.pop(0) # pop at 0. default is -1 or at the last
+        box_count[min_p] += 1
+        box_q.append(min_p + 1)
     else:
         box_count[i - 1] += 1
         box_q.append(i)
+        # update candidate
+        if (i - 1) in candidate:
+            candidate.remove(i - 1)
 
 print(" ".join(map(str, box_q)))
