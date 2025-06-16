@@ -41,4 +41,4 @@ for i in x:
         box_count[i - 1] += 1
         box_q.append(i)
 
-print(" ".join(map(str, box_q)))
+print(*box_q)

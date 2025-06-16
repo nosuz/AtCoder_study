@@ -57,7 +57,7 @@ for i in x:
         if len(candidate) == 0:
             candidate = full_scan(box_count)
 
-        min_p = candidate.pop(0) # pop at 0. default is -1 or at the last
+        min_p = candidate.pop(0)  # pop at 0. default is -1 or at the last
         box_count[min_p] += 1
         box_q.append(min_p + 1)
     else:
@@ -67,4 +67,4 @@ for i in x:
         if (i - 1) in candidate:
             candidate.remove(i - 1)
 
-print(" ".join(map(str, box_q)))
+print(*box_q)

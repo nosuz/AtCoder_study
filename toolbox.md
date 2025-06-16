@@ -128,6 +128,20 @@ print(str[0:2])
 
 ```
 
+### print
+
+Listの内容を印刷する。
+
+```python
+str = list("01234567")
+print(*str) # default: sep = " "
+print(*str, sep="")
+
+num = [0, 1, 2, 3, 4, 5, 6, 7]
+print(*num, sep=" ")
+```
+
+
 ## Dict型
 
 ### defaultdict
