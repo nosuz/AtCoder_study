@@ -8,7 +8,13 @@
 
 ## [A - Task Failed Successfully](https://atcoder.jp/contests/abc412/tasks/abc412_a)
 
+完了と目標のタスク数を比較するだけ。
+
 ## [B - Precondition](https://atcoder.jp/contests/abc412/tasks/abc412_b)
+
+文字列をスキャンして、大文字が見つかったら一つ前の文字を取り出し、指定文字列に含まれているか調べる。
+
+Pyhtonは、大文字か調べるメソッドを使えば大文字の判定が簡単。また含まれるかも`in`を使うと簡単。
 
 ## [C - Giant Domino](https://atcoder.jp/contests/abc412/tasks/abc412_c)
 
@@ -19,4 +25,3 @@
 ## [F - Socks 4](https://atcoder.jp/contests/abc412/tasks/abc412_f)
 
 ## [G - Degree Harmony](https://atcoder.jp/contests/abc412/tasks/abc412_g)
-
