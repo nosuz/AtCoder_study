@@ -64,8 +64,10 @@ for _ in range(t):
     s_n = s[-1]
 
     # simplify S items and sort them
-    items = [s_1] + sorted(set(filter(lambda x: (x > s_1)
-                           and (x < s_n), s[1:-1]))) + [s_n]
+    # items = [s_1] + sorted(set(filter(lambda x: (x > s_1)
+    #                        and (x < s_n), s[1:-1]))) + [s_n]
+    items = [s_1] + sorted(filter(lambda x: (x > s_1)
+                           and (x < s_n), s[1:-1])) + [s_n]
     # print(items)
 
     placed = [s_1]
