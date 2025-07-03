@@ -18,6 +18,8 @@ Pyhtonは、大文字か調べるメソッドを使えば大文字の判定が�
 
 ## [C - Giant Domino](https://atcoder.jp/contests/abc412/tasks/abc412_c)
 
+与えられたドミノを`filter()`で選別し、`set型`にすることで重複を除いた上でソートした。後は倒せる最大のドミノを探していく。
+
 ## [D - Make 2-Regular Graph](https://atcoder.jp/contests/abc412/tasks/abc412_d)
 
 ## [E - LCM Sequence](https://atcoder.jp/contests/abc412/tasks/abc412_e)
