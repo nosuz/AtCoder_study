@@ -71,30 +71,30 @@ for _ in range(t):
     placed = [s_1]
     start_index = 0
     start_size = s_1
-    while start_index != (len(items) - 1):
-        if (items[start_index] * 2) < items[start_index + 1]:
-            # print("X")
-            break
+    if (items[0] * 2) < items[1]:
+        # print("X")
+        print(-1)
+        continue
 
-        for i in range(start_index + 1, len(items)):
+    # start from 2 beacause the item[1] is already confirmed above.
+    for i in range(2, len(items)):
+        if (start_size * 2) < items[i]:
+            # failed to push over a domino.
+            # print(f"{start_size}x{items[i]}({i})")
+            start_index = i - 1
+            # print(f"start: {start_index}")
+            start_size = items[start_index]
+            placed.append(start_size)
+
+            # confirm pushable over the next.
             if (start_size * 2) < items[i]:
-                # print(f"{start_size}x{items[i]}({i})")
-                start_index = i - 1
-                # print(f"start: {start_index}")
-                start_size = items[start_index]
-                placed.append(start_size)
                 break
-            else:
-                # print(f"{start_size}-{items[i]}({i})")
-                pass
-
-            # reached the last domino.
-            if i == (len(items) - 1):
-                start_index = i
-                start_size = items[start_index]
-                placed.append(start_size)
+        else:
+            # print(f"{start_size}-{items[i]}({i})")
+            pass
     else:
-        # No break in whil-loop.
+        # No break in for-loop.
+        placed.append(s_n)
         # print(placed)
         print(len(placed))
         continue
