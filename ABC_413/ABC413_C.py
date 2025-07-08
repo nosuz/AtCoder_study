@@ -59,35 +59,32 @@
 Q = int(input())
 
 que = []
-query = []
+index = 0
 for _ in range(Q):
     q = list(map(int, input().split()))
     match q[0]:
         case 1:
             que.append({"num": q[1], "val": q[2]})
         case 2:
-            query.append(q[1])
-
-index = 0
-for size in query:
-    length = 0
-    sum = 0
-    # print(f"size: {size}")
-    for i in range(index, len(que)):
-        length += que[i]["num"]
-        sum += que[i]["val"] * que[i]["num"]
-
-        if length == size:
-            print(sum)
+            size = q[1]
             length = 0
             sum = 0
-            index = i + 1
-            break
-        elif length > size:
-            over = length - size
-            sum -= que[i]["val"] * over
-            print(sum)
+            # print(f"size: {size}")
+            for i in range(index, len(que)):
+                length += que[i]["num"]
+                sum += que[i]["val"] * que[i]["num"]
 
-            que[i]["num"] = over
-            index = i
-            break
+                if length == size:
+                    print(sum)
+                    length = 0
+                    sum = 0
+                    index = i + 1
+                    break
+                elif length > size:
+                    over = length - size
+                    sum -= que[i]["val"] * over
+                    print(sum)
+
+                    que[i]["num"] = over
+                    index = i
+                    break
