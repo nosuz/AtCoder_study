@@ -44,7 +44,7 @@ for _ in range(T):
         print("Yes")
         continue
 
-    a_set = list(set(a))
+    a_set = set(a)
     match len(a_set):
         case 1:
             # ratio 1
@@ -52,21 +52,12 @@ for _ in range(T):
             continue
         case 2:
             # ratio -1
-            if a_set[0] != -a_set[1]:
-                print("No")
+            # count + and -
+            delta = sum(a)
+            if (sum(a_set) == 0) and ((delta == 0) or (delta in a_set)):
+                print("Yes")
             else:
-                # count + and -
-                minus_item = 0
-                plus_item = 0
-                for i in range(len(a)):
-                    if a[i] > 0:
-                        plus_item += 1
-                    else:
-                        minus_item += 1
-                if abs(plus_item - minus_item) > 1:
-                    print("No")
-                else:
-                    print("Yes")
+                print("No")
             continue
 
     b = sorted(a, key=abs)
