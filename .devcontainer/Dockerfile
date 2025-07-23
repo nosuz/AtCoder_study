@@ -14,15 +14,19 @@ ARG GID=$UID
 # Remove user if already exist and create new user.
 RUN set -eux; \
     if getent passwd "${UID}" > /dev/null; then \
-        echo "UID ${UID} already exists. Deleting..."; \
-        userdel -f $(getent passwd "${UID}" | cut -d: -f1) || true; \
+    echo "UID ${UID} already exists. Deleting..."; \
+    userdel -f $(getent passwd "${UID}" | cut -d: -f1) || true; \
     fi; \
     if getent group "${GID}" > /dev/null; then \
-        echo "GID ${GID} already exists. Deleting..."; \
-        groupdel $(getent group "${GID}" | cut -d: -f1) || true; \
+    echo "GID ${GID} already exists. Deleting..."; \
+    groupdel $(getent group "${GID}" | cut -d: -f1) || true; \
     fi; \
+    rm -rf /home/*; \
     groupadd --gid "${GID}" "${USERNAME}"; \
     useradd --uid "${UID}" --gid "${GID}" -s /bin/bash -m "${USERNAME}"
+
+# install packages
+ENV DEBIAN_FRONTEND=noninteractive
 
 # enable sudo
 RUN --mount=type=cache,target=/var/cache/apt \
@@ -31,9 +35,6 @@ RUN --mount=type=cache,target=/var/cache/apt \
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
-
-# install packages
-ENV DEBIAN_FRONTEND=noninteractive
 
 # APT Firefox
 # Fixed to install from not snap but apt
@@ -65,8 +66,8 @@ RUN --mount=type=cache,target=/var/cache/apt \
     python3 python3-dev python3-venv python-is-python3 \
     firefox dbus-x11 fonts-noto-cjk
 
-COPY .devcontainer/init-docker-volume.sh /usr/local/bin/init-docker-volume.sh
-RUN chmod +x /usr/local/bin/init-docker-volume.sh
+COPY .devcontainer/init-docker-container.sh /usr/local/bin/init-docker-container.sh
+RUN chmod +x /usr/local/bin/init-docker-container.sh
 
 # change user. Exec as vscode after this directive.
 USER vscode
@@ -80,8 +81,8 @@ RUN --mount=type=cache,target=/home/vscode/.cache/pip \
     && $HOME/venv/bin/pip install --upgrade pip \
     && $HOME/venv/bin/pip install -r requirements.txt
 
-# activate venv for Pylance
-RUN cat <<EOF >> /home/vscode/.bashrc
+# activate venv
+RUN cat <<'EOF' >> /home/vscode/.bashrc
 
 export LANG=$LANG
 
@@ -89,8 +90,3 @@ if [ -f "$HOME/venv/bin/activate" ] && [ -z "$VIRTUAL_ENV" ]; then
     . "$HOME/venv/bin/activate"
 fi
 EOF
-
-# $HOME is not expand in ENV
-ENV PATH="/home/vscode/venv/bin:$PATH"
-
-CMD ["/usr/local/bin/init-docker-volume.sh"]
