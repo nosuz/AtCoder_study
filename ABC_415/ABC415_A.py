@@ -27,6 +27,9 @@
 N = int(input())
 A = list(map(int, input().split()))
 X = int(input())
+# also can handle as strings
+# A = input().split()
+# X = input()
 
 if X in A:
     print("Yes")
