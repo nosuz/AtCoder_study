@@ -18,6 +18,8 @@
 
 ## [C - Mixture](https://atcoder.jp/contests/abc415/tasks/abc415_c)
 
+溶液の組み合わせをビット列とみなして、１種類ずつ加えて全てが混じった状態に到達できるか調べる。
+
 ## [D - Get Many Stickers](https://atcoder.jp/contests/abc415/tasks/abc415_d)
 
 ## [E - Hungry Takahashi](https://atcoder.jp/contests/abc415/tasks/abc415_e)
