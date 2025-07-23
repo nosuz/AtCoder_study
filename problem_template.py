@@ -12,6 +12,14 @@
 {% endfor %}
 """
 
+DEBUG = True
+
+
+def debug(*args):
+    if globals().get("DEBUG", False):
+        print(*args)
+
+
 A = int(input())
 
 A, B = input().split()
