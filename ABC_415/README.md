@@ -22,6 +22,10 @@
 
 ## [D - Get Many Stickers](https://atcoder.jp/contests/abc415/tasks/abc415_d)
 
+与えられる交換ルールをお得順（ボトルの数が減らない順）で考える。同じお得度なら、交換に必要なボトル数が少ないものを選択。交換ルールは、お得順にソートする。
+
+ステップごとに考えるのではなく、交換可能なルールが見つかったらそのルールが適応できなくなるまで繰り返す。これで実際に試さなくても何回繰り返せるかが計算で求められる。ルールが適応できなくなったら、次にお徳なルールを順次試す。
+
 ## [E - Hungry Takahashi](https://atcoder.jp/contests/abc415/tasks/abc415_e)
 
 ## [F - Max Combo](https://atcoder.jp/contests/abc415/tasks/abc415_f)
