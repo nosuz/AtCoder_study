@@ -2,7 +2,7 @@
 
 import re
 import subprocess
-import sys
+import os
 import argparse
 
 
@@ -21,7 +21,7 @@ def extract_test_data(filename):
         return None
 
 
-def run_prog_with_data(prog_name, data):
+def run_prog_with_data(prog_name, data, debug=False):
     blocks = data.strip().split("\n\n")  # Split into blocks by empty lines
     for index, block in enumerate(blocks):
         # skip not specified sample
@@ -36,8 +36,12 @@ def run_prog_with_data(prog_name, data):
             expected_answer = None
         print(f"Input {index + 1}")
         print(input_data)
+
+        env = os.environ.copy()
+        if debug:
+            env['DEBUG'] = '1'
         process = subprocess.Popen(["python3", prog_name], stdin=subprocess.PIPE,
-                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)
         stdout, stderr = process.communicate(input=input_data)
         stdout = stdout.strip().replace('\n', ' ')
         print(f"Output {index + 1}")
@@ -56,6 +60,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--limit', type=parse_limit,
                         help='limit validation sample. --limit 1,2,3')
+    parser.add_argument('--debug', action='store_true',
+                        help='set DEBUG=1 in subprocess')
     parser.add_argument('filename', help='target code file')
 
     args = parser.parse_args()
@@ -64,6 +70,6 @@ if __name__ == "__main__":
     extracted_data = extract_test_data(args.filename)
     if extracted_data is not None:
         # Use filename as program name
-        run_prog_with_data(args.filename, extracted_data)
+        run_prog_with_data(args.filename, extracted_data, args.debug)
     else:
         print("TEST_DATA not found.")

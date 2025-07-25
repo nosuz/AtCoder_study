@@ -12,11 +12,11 @@
 {% endfor %}
 """
 
-DEBUG = True
+import os
 
 
 def debug(*args):
-    if globals().get("DEBUG", False):
+    if os.environ.get("DEBUG") in ("1", "true", "True", "yes"):
         print(*args)
 
 
