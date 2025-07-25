@@ -45,7 +45,7 @@ T = int(input())
 
 for _ in range(T):
     N = int(input())
-    S = list(input())
+    S = input()
 
     ALL_MIXED = 2**N - 1
     if S[ALL_MIXED - 1] == "1":
@@ -74,8 +74,8 @@ for _ in range(T):
                     if u != s:
                         # added new solution
                         next_state.add(u)
-        state = next_state
         debug(">>>")
         debug(*next_state)
+        state = next_state
     else:
         print("No")
