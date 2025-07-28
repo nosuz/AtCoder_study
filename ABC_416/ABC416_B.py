@@ -39,5 +39,5 @@ for i in s:
     if i == '':
         T.append('')
     else:
-        T.append('o' + '.' * (len(i) - 1))
+        T.append('o' + i[1:])
 print("#".join(T))

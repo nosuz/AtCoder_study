@@ -36,11 +36,9 @@ N, L, R = map(int, input().split())
 S = input()
 
 debug(S, L-1, R)
-# set("LIST") resuls {'S', 'T', 'L', 'I'}
-span = set(S[L-1:R])
-
-debug(span)
-if (len(span) == 1) and ('o' in span):
-    print("Yes")
+for i in range(L-1, R):
+    if S[i] != 'o':
+        print("No")
+        break
 else:
-    print("No")
+    print("Yes")
