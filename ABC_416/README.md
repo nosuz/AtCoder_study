@@ -18,6 +18,10 @@ A問題なので、`for`でループしても良かった。
 
 ## [C - Concat (X-th)](https://atcoder.jp/contests/abc416/tasks/abc416_c)
 
+[解説](https://atcoder.jp/contests/abc416/editorial/13535)を読んで、ヤラレタ感。
+
+組み合わせは最大10^5なので、実際に全ての組み合わせを作成して`sort`する。このどこまでなら力技が通用するかを見極めることがポイントだった。
+
 ## [D - Match, Mod, Minimize 2](https://atcoder.jp/contests/abc416/tasks/abc416_d)
 
 ## [E - Development](https://atcoder.jp/contests/abc416/tasks/abc416_e)
