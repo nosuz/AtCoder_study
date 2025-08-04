@@ -36,7 +36,7 @@ count = 0
 Aj = []
 for j in range(N):
     a = j - A[j]
-    if a > 0:
+    if a >= 2:
         Aj.append(a)
 debug(Aj)
 
