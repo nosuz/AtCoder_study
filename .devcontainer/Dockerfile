@@ -1,7 +1,10 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:latest
 # suppress clear apt cache
-RUN rm /etc/apt/apt.conf.d/docker-clean
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+
+# install packages
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENV LANG=ja_JP.UTF-8
 #ENV LC_ALL=ja_JP.UTF-8
@@ -25,12 +28,9 @@ RUN set -eux; \
     groupadd --gid "${GID}" "${USERNAME}"; \
     useradd --uid "${UID}" --gid "${GID}" -s /bin/bash -m "${USERNAME}"
 
-# install packages
-ENV DEBIAN_FRONTEND=noninteractive
-
 # enable sudo
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,sharing=locked,target=/var/lib/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
@@ -40,8 +40,8 @@ RUN --mount=type=cache,target=/var/cache/apt \
 # Fixed to install from not snap but apt
 # https://linux-jp.org/?p=5455
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,sharing=locked,target=/var/lib/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt-get install --no-install-recommends -y \
     software-properties-common \
@@ -58,8 +58,8 @@ Pin: version 1:1snap1-0ubuntu2
 Pin-Priority: -1
 EOF
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,sharing=locked,target=/var/lib/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt-get install --no-install-recommends -y \
     git ssh \
@@ -75,7 +75,7 @@ USER vscode
 COPY requirements.txt .
 ARG PIP_CACHE_DIR=/home/vscode/.cache/pip
 RUN mkdir -p $PIP_CACHE_DIR
-RUN --mount=type=cache,target=/home/vscode/.cache/pip \
+RUN --mount=type=cache,target=/home/vscode/.cache/pip,sharing=locked  \
     sudo chown vscode:vscode /home/vscode/.cache/pip \
     && python3 -m venv $HOME/venv \
     && $HOME/venv/bin/pip install --upgrade pip \
