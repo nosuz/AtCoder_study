@@ -22,7 +22,13 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "python.analysis.typeCheckingMode": "basic"
+        "python.analysis.typeCheckingMode": "basic",
+        // suppress hover hints.
+        // "editor.parameterHints.enabled": false,
+        // "editor.hover.enabled": false,
+        "github.copilot.enable": {
+          "*": false
+        }
       },
       "extensions": [
         "mhutchie.git-graph",
@@ -33,7 +39,8 @@
         "ms-python.python",
         // "kevinrose.vsc-python-indent",
         "esbenp.prettier-vscode",
-        "shd101wyy.markdown-preview-enhanced"
+        "shd101wyy.markdown-preview-enhanced",
+        "takumii.markdowntable"
       ]
     }
   }
