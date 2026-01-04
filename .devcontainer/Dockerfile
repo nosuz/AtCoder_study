@@ -66,8 +66,31 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     python3 python3-dev python3-venv python-is-python3 \
     firefox dbus-x11 fonts-noto-cjk
 
-COPY .devcontainer/init-docker-container.sh /usr/local/bin/init-docker-container.sh
-RUN chmod +x /usr/local/bin/init-docker-container.sh
+# COPY .devcontainer/init-docker-container.sh /usr/local/bin/init-docker-container.sh
+# RUN chmod +x /usr/local/bin/init-docker-container.sh
+
+# Minial Java
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update \
+    && apt-get install --no-install-recommends -y \
+    # Basic tools
+    # ssh is required to handle GitHub in the container
+    # git ssh \
+    default-jdk-headless \
+    # default-jdk \
+    # required to install sdkman and gradle
+    # Both zip and unzip are required to install.
+    curl unzip zip \
+    # System tools
+    locales tzdata \
+    # Configure locale
+    && locale-gen ja_JP.UTF-8 \
+    && update-locale LANG=ja_JP.UTF-8 \
+    # Configure timezone
+    && ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata
+
 
 # change user. Exec as vscode after this directive.
 USER vscode

@@ -16,7 +16,8 @@
   },
 
   // Uncomment the next line to run commands after the container is created.
-  "postCreateCommand": "/usr/local/bin/init-docker-container.sh",
+  // "postCreateCommand": "/usr/local/bin/init-docker-container.sh",
+  "postCreateCommand": "bash /workspaces/.devcontainer/post-create-commands.sh",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -40,7 +41,8 @@
         // "kevinrose.vsc-python-indent",
         "esbenp.prettier-vscode",
         "shd101wyy.markdown-preview-enhanced",
-        "takumii.markdowntable"
+        "takumii.markdowntable",
+        "vscjava.vscode-java-pack"
       ]
     }
   }
