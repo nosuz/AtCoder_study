@@ -116,6 +116,15 @@ print(f"-{char1}-{char2}-")
 
 ```
 
+### 文字列をばらばらにする
+
+```python
+list = list("abcd")
+print(list)
+# ['a', 'b', 'c', 'd']
+
+```
+
 ## List型
 
 ```python
@@ -141,6 +150,15 @@ num = [0, 1, 2, 3, 4, 5, 6, 7]
 print(*num, sep=" ")
 ```
 
+### enumerate
+
+インデックスと値を一緒に取り出す。Dict型にも使用できる。
+
+```python
+num = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+for index, value in enumerate(num):
+    print(f"index: {index}, value: {value}")
+```
 
 ## Dict型
 
