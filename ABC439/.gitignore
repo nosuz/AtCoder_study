@@ -1,0 +1,49 @@
+# =========================
+# Build / Gradle
+# =========================
+.gradle/
+build/
+out/
+bin/
+
+# =========================
+# IDE
+# =========================
+.idea/
+.vscode/
+*.iml
+
+# =========================
+# OS
+# =========================
+.DS_Store
+
+# =========================
+# example cache
+# =========================
+cache/
+examples/
+
+# =========================
+# Generated Java sources
+# （setup-java.py が自動生成）
+# =========================
+src/main/**/*.java
+src/test/**/*Test.java
+
+# =========================
+# Allow commit for solved problems
+# =========================
+# 解けた問題は、以下の行のコメント (#) を外してください
+# !src/main/java//A.java
+# !src/test/java//ATest.java
+# !src/main/java//B.java
+# !src/test/java//BTest.java
+# !src/main/java//C.java
+# !src/test/java//CTest.java
+!src/main/**/D.java
+!src/test/**/DTest.java
+# !src/main/java//E.java
+# !src/test/java//ETest.java
+# !src/main/java//F.java
+# !src/test/java//FTest.java

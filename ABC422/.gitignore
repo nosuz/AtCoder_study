@@ -1,0 +1,52 @@
+# =========================
+# IDE
+# =========================
+.idea/
+.vscode/
+*.iml
+
+# =========================
+# OS
+# =========================
+.DS_Store
+
+# =========================
+# example cache
+# =========================
+cache/
+examples/
+
+# <<< gitignore:java >>>
+# =========================
+# Build / Gradle
+# =========================
+.gradle/
+build/
+out/
+bin/
+
+# =========================
+# Generated Java sources
+# （setup-java.py が自動生成）
+# =========================
+src/main/java/abc422/*.java
+src/test/java/abc422/*Test.java
+
+# =========================
+# Allow commit for solved problems
+# =========================
+# 解けた問題は、以下の行のコメント (#) を外してください
+#
+# --- Java ---
+!src/main/java/abc422/A.java
+!src/test/java/abc422/ATest.java
+# !src/main/java/abc422/B.java
+# !src/test/java/abc422/BTest.java
+# !src/main/java/abc422/C.java
+# !src/test/java/abc422/CTest.java
+# !src/main/java/abc422/D.java
+# !src/test/java/abc422/DTest.java
+# !src/main/java/abc422/E.java
+# !src/test/java/abc422/ETest.java
+# !src/main/java/abc422/F.java
+# !src/test/java/abc422/FTest.java
