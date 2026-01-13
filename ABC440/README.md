@@ -16,6 +16,9 @@ keyを使ったソート問題。インデックスが0始まりなことに注�
 
 ## [C - Striped Horse](https://atcoder.jp/contests/abc440/tasks/abc440_c)
 
+余りごとのコスをを計算しておく。そしてWより小さくなる範囲をシフトさせて累積和から最小コストを探す。
+NがW以下の場合に注意する。
+
 ## [D - Forbidden List 2](https://atcoder.jp/contests/abc440/tasks/abc440_d)
 
 ## [E - Cookies](https://atcoder.jp/contests/abc440/tasks/abc440_e)
