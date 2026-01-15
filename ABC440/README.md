@@ -21,6 +21,8 @@ NがW以下の場合に注意する。
 
 ## [D - Forbidden List 2](https://atcoder.jp/contests/abc440/tasks/abc440_d)
 
+Xが入る位置を二分探索し、空いている数の累積和をY先に入れるために必要な空間数で二分探索した。
+
 ## [E - Cookies](https://atcoder.jp/contests/abc440/tasks/abc440_e)
 
 ## [F - Egoism](https://atcoder.jp/contests/abc440/tasks/abc440_f)
