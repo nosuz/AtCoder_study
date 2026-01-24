@@ -42,8 +42,16 @@ def debug(*args):
         print(*args)
 
 
-N, M, L, S, T = map(int, input().split())
+def walk(path, node, cost, step):
+    if step == L:
+        if S <= cost <= T:
+            reached.add(node)
+    else:
+        for p in path[node]:
+            walk(path, p[0], cost + p[1], step + 1)
 
+
+N, M, L, S, T = map(int, input().split())
 
 path = [[] for i in range(N+1)]
 for n in range(M):
@@ -54,19 +62,8 @@ debug(path)
 debug(path[0])
 
 reached = set()
-
-
-def walk(node, cost, step):
-    if step == L:
-        if S <= cost <= T:
-            reached.add(node)
-    else:
-        for p in path[node]:
-            walk(p[0], cost + p[1], step + 1)
-
-
 for p in path[1]:
-    walk(p[0], p[1], 1)
+    walk(path, p[0], p[1], 1)
 
 if len(reached) == 0:
     print("")
