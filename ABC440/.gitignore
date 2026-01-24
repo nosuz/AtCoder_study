@@ -42,8 +42,8 @@ src/test/java/abc440/*Test.java
 # !src/test/java/abc440/ATest.java
 # !src/main/java/abc440/B.java
 # !src/test/java/abc440/BTest.java
-# !src/main/java/abc440/C.java
-# !src/test/java/abc440/CTest.java
+!src/main/java/abc440/C.java
+!src/test/java/abc440/CTest.java
 !src/main/java/abc440/D.java
 !src/test/java/abc440/DTest.java
 !src/main/java/abc440/E.java
