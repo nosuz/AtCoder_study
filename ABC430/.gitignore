@@ -1,0 +1,78 @@
+# =========================
+# IDE
+# =========================
+.idea/
+.vscode/
+*.iml
+
+# =========================
+# OS
+# =========================
+.DS_Store
+
+# =========================
+# example cache
+# =========================
+cache/
+examples/
+
+# <<< gitignore:java >>>
+# =========================
+# Build / Gradle
+# =========================
+.gradle/
+build/
+out/
+bin/
+
+# =========================
+# Generated Java sources
+# （setup-java.py が自動生成）
+# =========================
+src/main/java/abc430/*.java
+src/test/java/abc430/*Test.java
+
+# =========================
+# Allow commit for solved problems
+# =========================
+# 解けた問題は、以下の行のコメント (#) を外してください
+#
+# --- Java ---
+!src/main/java/abc430/A.java
+!src/test/java/abc430/ATest.java
+!src/main/java/abc430/B.java
+!src/test/java/abc430/BTest.java
+# !src/main/java/abc430/C.java
+# !src/test/java/abc430/CTest.java
+# !src/main/java/abc430/D.java
+# !src/test/java/abc430/DTest.java
+# !src/main/java/abc430/E.java
+# !src/test/java/abc430/ETest.java
+# !src/main/java/abc430/F.java
+# !src/test/java/abc430/FTest.java
+
+# <<< gitignore:python >>>
+# =========================
+# Generated Python sources
+# （setup-python.py が自動生成）
+# =========================
+*.py
+tests/*.py
+# pytest.ini
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# --- Python ---
+# !A.py
+# !tests/test_a.py
+# !B.py
+# !tests/test_b.py
+# !C.py
+# !tests/test_c.py
+# !D.py
+# !tests/test_d.py
+# !E.py
+# !tests/test_e.py
+# !F.py
+# !tests/test_f.py
