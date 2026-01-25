@@ -46,6 +46,7 @@ def debug(*args):
 
 
 def combination(n):
+    # 3人選ぶので割り算の項が固定されて簡単になる。
     # n! / (n-3)! / 3!
     c = n * (n-1) * (n - 2) // 6
     return c
@@ -65,6 +66,8 @@ for m in range(M):
 
 for n in range(N):
     # print(conflict[n])
+    # 著者も利害関係者に含まれるので、査読できない。
     reviewers = N - len(conflict[n]) - 1
     # print(reviewers)
+    # 査読可能な人数から3人を選ぶ組み合わせの数。
     print(combination(reviewers))

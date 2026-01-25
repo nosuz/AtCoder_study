@@ -62,16 +62,19 @@ for n in range(N):
     sum.append(sum[n] + A[n])
 # print(sum)
 
+# Qの制約から、実際に操作しても間に合うと判断した。
 for q in range(Q):
     query = list(map(int, input().split()))
     # print(query)
     if query[0] == 1:
         x = query[1] - 1
+        # 累積和は、隣と交換しても前後に影響しない。
         delta = A[x+1] - A[x]
+        sum[x+1] += delta
+        # 移動
         tmp = A[x+1]
         A[x+1] = A[x]
         A[x] = tmp
-        sum[x+1] += delta
     else:
         # print(A)
         # print(sum)
