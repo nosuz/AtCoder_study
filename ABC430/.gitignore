@@ -42,8 +42,8 @@ src/test/java/abc430/*Test.java
 !src/test/java/abc430/ATest.java
 !src/main/java/abc430/B.java
 !src/test/java/abc430/BTest.java
-# !src/main/java/abc430/C.java
-# !src/test/java/abc430/CTest.java
+!src/main/java/abc430/C.java
+!src/test/java/abc430/CTest.java
 # !src/main/java/abc430/D.java
 # !src/test/java/abc430/DTest.java
 # !src/main/java/abc430/E.java
@@ -68,8 +68,8 @@ __pycache__/
 # !tests/test_a.py
 # !B.py
 # !tests/test_b.py
-# !C.py
-# !tests/test_c.py
+!C.py
+!tests/test_c.py
 # !D.py
 # !tests/test_d.py
 # !E.py

@@ -16,6 +16,11 @@
 
 ## [C - Truck Driver](https://atcoder.jp/contests/abc430/tasks/abc430_c)
 
+Aを満たす位置とBを満たす位置を探す。尺取り法。
+
+- Python
+- Java
+
 ## [D - Neighbor Distance](https://atcoder.jp/contests/abc430/tasks/abc430_d)
 
 ## [E - Shift String](https://atcoder.jp/contests/abc430/tasks/abc430_e)
