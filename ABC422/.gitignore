@@ -40,8 +40,8 @@ src/test/java/abc422/*Test.java
 # --- Java ---
 !src/main/java/abc422/A.java
 !src/test/java/abc422/ATest.java
-# !src/main/java/abc422/B.java
-# !src/test/java/abc422/BTest.java
+!src/main/java/abc422/B.java
+!src/test/java/abc422/BTest.java
 # !src/main/java/abc422/C.java
 # !src/test/java/abc422/CTest.java
 # !src/main/java/abc422/D.java
