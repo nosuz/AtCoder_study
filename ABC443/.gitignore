@@ -40,8 +40,8 @@ src/test/java/abc443/*Test.java
 # --- Java ---
 !src/main/java/abc443/A.java
 !src/test/java/abc443/ATest.java
-# !src/main/java/abc443/B.java
-# !src/test/java/abc443/BTest.java
+!src/main/java/abc443/B.java
+!src/test/java/abc443/BTest.java
 !src/main/java/abc443/C.java
 !src/test/java/abc443/CTest.java
 # !src/main/java/abc443/D.java
