@@ -51,7 +51,11 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 
 ## Dev Container
 
-Dev Container になっています。コンテナを作成する手順は、次のとおりです。
+[AtCoder用のDev Container](https://github.com/nosuz/atcoder_devcon)を使用しています。そのため、プログラミング環境の他、Javaのコードを簡単にコンテストページに貼り付けるChrome拡張などもレポジトリに含んでいます。
+
+### Container の作成
+
+コンテナを作成する手順は、次のとおりです。
 
 1. このレポジトリをクローンする。
 2. UID と GID を確認する。
@@ -73,65 +77,83 @@ python .devcontainer/generate_env.py
 
 以上で、Python 環境の他、問題の入出力例を取得するプログラムが使えるようになります。
 
-### 問題の入力例と出力例の収集
+#### ログインテスト
 
-`setting.py`コマンドを使うと、Firefox を使用して指定コンテストの問題ページから提示された入力例と出力例を取得して、その例をプログラムのテンプレートに埋め込むことがでいます。このテンプレートを使ってコードを作成すると、`validate.py`コマンドで解答が期待通りか検証できます。
-
-ただしこのプラグラムを実行する前には、いくつか事前の準備が必要です。
-
-#### Firefox 画面の表示許可
-
-Firefox の画面を表示させるには、ローカルの X11 サーバが外部からの接続を許可する必要があります。そこでコンテナを実行しているマシン（注意：コンテナ内でない）上で次のコマンドで許可をしておきます。。
+ログイン状態かは、次のコマンドで確認できます。
 
 ```bash
-xhost +local:
+./setup.py --login
 ```
 
-#### Firefox のプロファイル作成
+`Screen Name`が表示されない場合は、ログイン状態が解除されています。Web Browserからcookie情報をコピーしてください。
 
-問題ページの巡回には、Firefox に専用プロファイル`selenium`を使用します。次のコマンドで Firefox を起動した後、[AtCoder](https://atcoder.jp/?lang=ja)にログインしておきます。
+### 入力・出力例の取得とコード作成
+
+スケルトンコードとテストコードの作成には、`setup.py`を使用します。例えばABC439のコードを作成するには、次のコマンドを実行します。
 
 ```bash
-firefox -p selenium
+./setup.py abc439
 ```
 
-もしプロファイルがない場合には、プロファイル選択画面が表示されます。`Create Profile...`を選択して、`selenium`という名前のプロファイルを作成します。
+このコマンドを実行すると、`default_lang.txt`で指定した言語用のスケルトンコードとテストコードが作成されます。オプションにより、作成する言語を指定することができます。
 
-プロファイルを保存するフォルダ（ディレクトリ）は、`/home/vscode.mozilla`以下にしてください。ここ以外を選択すると、プロファイル内容が消えてしまいます。
+### Options
 
-#### 入出力例の収集
+- --python, --java: それぞれPythonとJava用のスケルトンコードとテストコードを作成します。
 
-各問題の入力例と出力例は、次のコマンドで収集して、コメントとして埋め込んだ解答プログラムのテンプレートを作成します。
+### default_lang.txt
+
+`default_lang.txt`は、`setup.py`がオプションの指定なしに実行された時に作成する言語を指定します。
+
+- #から始まる行は、コメントとなる。
+- 言語は、各1行で指定する。
+
+## Testing Codes
+
+### Python
+
+Pythonのテスト環境は、[pytest](https://docs.pytest.org/en/stable/)を使う方法と、`validate.py`を使う方法があります。
+
+#### pytest
+
+`pytest`を使った入力・出力例でのテスト
 
 ```bash
-# ABC 123の例を収集
-./setting.py abc123
+# A問題のテスト
+pytest tests/test_a.py
+
+# 個別の入力例でテスト
+pytest tests/test_a.py -k sample1
+pytest tests/test_a.py -k sample2
+
 ```
 
-実行すると Firefox が起動して、各ページを自動的に巡回します。ただし Firefox は Headless mode で動いているので、画面は表示されません。
+#### validate.py
 
-AtCoder のコンテスト開催中は、そのコンテストに参加登録したユーザでないと対象コンテストの問題ページを見ることができません。そのため事前にログイン情報を Firefox のプロファイルに保存しておく必要があります。
+`validate.py`を使った入力・出力例でのテスト
 
-### 解答コードの検証
-
-`setting.py`が作成したテンプレートには、問題の入力例と期待される出力例が挿入されています。そこで、このテンプレートを使って解答コードを書くと、`validate.py`で期待した出力が得られるかコードを検証できます。
+`validate.py`用の入力・出力例は、コードにコメントとして記載します。そのため自作の入力例を簡単にテストすることができます。
 
 ```bash
-./validate.py ABC_408/ABC408_A.py
+# A問題のテスト
+python ../validate.py A.py
+
+# 個別の入力例でテスト
+python ../validate.py A.py --limit 1
+python ../validate.py A.py --limit 1,2
+
 ```
 
-OK と表示されれば、期待される出力例と一致しています。
+### Java
 
-一部の入力例についてのみ検証する場合は、`--limit`オプションを使用します。例えば入力例 1 についての場合は、次のようにします。
+`JUnit`を使った入力・出力例でのテスト
 
 ```bash
-./validate.py --limit 1 ABC_408/ABC408_A.py
+# A問題のテスト
+gradle test --tests ATest
+
+# 個別の入力例でテスト
+gradle test --tests ATest.sample1
+gradle test --tests ATest.sample2
+
 ```
-
-コンマで番号を区切ることで、複数の例を指定することも可能です。
-
-```bash
-./validate.py --limit 1,3 ABC_408/ABC408_A.py
-```
-
-全ての出力例が`OK`となったら、AtCoder に提出します。

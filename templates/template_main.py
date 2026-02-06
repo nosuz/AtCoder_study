@@ -1,15 +1,18 @@
 #!/usr/bin/python3
 
-# python3 validate.py sample.py
-
 # {{contents.title}}
 # {{contents.url}}
 
-"""TEST_DATA
-{% for example in contents.examples %}{{example.0}}
-<expected> {{example.1}}
+# python ../validate.py {{contents.problem}}.py
 
-{% endfor %}
+# pytest tests/test_{{contents.problem | lower}}.py
+# pytest tests/test_{{contents.problem | lower}}.py -k sample1
+
+"""TEST_DATA
+{% for ex in examples %}{{ex.input}}
+<expected> {{ex.output}}
+
+{% endfor -%}
 """
 
 import os

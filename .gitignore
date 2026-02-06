@@ -1,6 +1,7 @@
-sample.py
 .vscode/
-atcoder_login.png
+__pycache__/
+cookies.json
+sample.py
 
 # unsolved problems
 # ABC_392

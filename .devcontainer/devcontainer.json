@@ -1,5 +1,5 @@
 {
-  "name": "AtCoder",
+  "name": "DevContainer",
   "workspaceFolder": "/workspaces",
   // UID and GID is imported from .env file.
   "dockerComposeFile": "compose.yaml",
@@ -9,15 +9,9 @@
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
-  "portsAttributes": {
-    "2828": {
-      "onAutoForward": "ignore"
-    }
-  },
 
   // Uncomment the next line to run commands after the container is created.
-  // "postCreateCommand": "/usr/local/bin/init-docker-container.sh",
-  "postCreateCommand": "bash /workspaces/.devcontainer/post-create-commands.sh",
+  "postCreateCommand": "bash /workspaces/.devcontainer/install-gradle.sh",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -34,8 +28,10 @@
       "extensions": [
         "mhutchie.git-graph",
         "streetsidesoftware.code-spell-checker",
+        "jgclark.vscode-todo-highlight",
         "ms-python.autopep8",
-        "formulahendry.code-runner",
+        // "formulahendry.code-runner",
+        // "samuelcolvin.jinjahtml",
         // ms-python.python install Pylance and Python Debugger
         "ms-python.python",
         // "kevinrose.vsc-python-indent",
