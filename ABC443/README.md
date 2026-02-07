@@ -40,6 +40,22 @@ $$
 
 ## [D - Pawn Line](https://atcoder.jp/contests/abc443/tasks/abc443_d)
 
+2つのアルゴリズム `D.java`と`D2.java`。
+
+`D.java`は、一番下の駒から左右に広げていゆく。1ヶ所に集中して伸ばすと、より低い駒が見つかった時に再配置が必要になる。そこで1段だけ伸ばして隣に移る。
+
+格段にある駒の位置を記録したListオプジェクトをそのまま使うと、オブジェクトサイズが大きくなってLTEになる。それに無駄なループが多い。
+
+`D2.java`は、仮想的な駒を配置する[解説](https://atcoder.jp/contests/abc443/editorial/15179)を実装したもの。
+
+1. 局所的最小値から $ \left| R[i] - R[i+1] \right| = 1 $ となる場所に線を引く。
+    1. 局所的最小値から右に向かって上の条件を満たす場所に線を引く。
+    2. 同様に左に向かって局所的最小値から線を引く。
+2. 先の小さい方が、最終的な駒の位置となる。
+3. 実際の駒と目的の場所との差を累積する。
+
+- Java
+
 ## [E - Climbing Silver](https://atcoder.jp/contests/abc443/tasks/abc443_e)
 
 ## [F - Non-Increasing Number](https://atcoder.jp/contests/abc443/tasks/abc443_f)
