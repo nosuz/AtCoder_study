@@ -28,6 +28,10 @@
 
 ## [D - Many Repunit Sum](https://atcoder.jp/contests/abc444/tasks/abc444_d)
 
+大きな掛け算は時間がかかる。筆算と同じように順番に計算する。
+
+- Python
+
 ## [E - Sparse Range](https://atcoder.jp/contests/abc444/tasks/abc444_e)
 
 ## [F - Half and Median](https://atcoder.jp/contests/abc444/tasks/abc444_f)
