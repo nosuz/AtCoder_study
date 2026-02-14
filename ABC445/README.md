@@ -20,6 +20,12 @@
 
 ## [C - Sugoroku Destination](https://atcoder.jp/contests/abc445/tasks/abc445_c)
 
+$10^{100}$ は、場所の数 $N$ よりも十分に大きい。そのため、同じ場所でグルグルにたどり着く場合は、どこからはじめてもその場所にたどり着く。
+
+複数の場所をめぐるループになる可能性がある。しかし問題の解説からは、その可能性が排除されているように思える。実際複数の場所をめぐるループがない前提のコードで正解になった。問題文からは、なぜ複数の場所をめぐるループの可能性を排除できるのか読み取れなかった。
+
+- Python
+
 ## [D - Reconstruct Chocolate](https://atcoder.jp/contests/abc445/tasks/abc445_d)
 
 ## [E - Many LCMs](https://atcoder.jp/contests/abc445/tasks/abc445_e)
