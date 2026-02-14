@@ -18,6 +18,10 @@
 
 ## [C - AtCoder AAC Contest](https://atcoder.jp/contests/abc422/tasks/abc422_c)
 
+最も低コストな大会はABC。よって、ABCの数を引いた残りのAとCで、AとCだけで作れる大会を開催する。
+
+-Python
+
 ## [D - Least Unbalanced](https://atcoder.jp/contests/abc422/tasks/abc422_d)
 
 ## [E - Colinear](https://atcoder.jp/contests/abc422/tasks/abc422_e)
