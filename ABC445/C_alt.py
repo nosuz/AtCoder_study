@@ -3,10 +3,7 @@
 # C - Sugoroku Destination
 # https://atcoder.jp/contests/abc445/tasks/abc445_c
 
-# python ../validate.py C.py
-
-# pytest tests/test_c.py
-# pytest tests/test_c.py -k sample1
+# python ../validate.py C_alt.py
 
 """TEST_DATA
 7
@@ -34,25 +31,14 @@ def debug(*args):
 N = int(input())
 A = list(map(int, input().split()))
 
-# reverse pathは、複数の経路があることに注意
-rev_path = [[] for _ in range(N)]
-stuck = set()
-stucked = [-1] * N
 for i in range(N):
     A[i] -= 1
+
+stucked = [-1] * N
+for i in range(N-1, -1, -1):
     if A[i] == i:
-        stuck.add(i)
         stucked[i] = i
     else:
-        rev_path[A[i]].append(i)
-debug(stuck, rev_path)
-
-for s in stuck:
-    que = rev_path[s]
-    while len(que) > 0:
-        i = que.pop()
-        stucked[i] = s
-
-        que += rev_path[i]
+        stucked[i] = stucked[A[i]]
 
 print(*[x+1 for x in stucked])
