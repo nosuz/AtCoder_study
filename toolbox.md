@@ -196,3 +196,14 @@ else:
 print(i)
 
 ```
+
+## 数値型
+
+### floor ceil
+
+```python
+import math
+
+math.floor()
+math.ceil()
+```
