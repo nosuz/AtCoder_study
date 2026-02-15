@@ -29,10 +29,7 @@ def debug(*args):
 
 
 N = int(input())
-A = list(map(int, input().split()))
-
-for i in range(N):
-    A[i] -= 1
+A = list(map(lambda x: int(x) - 1, input().split()))
 
 stucked = [-1] * N
 for i in range(N-1, -1, -1):

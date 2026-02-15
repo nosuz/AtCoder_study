@@ -32,14 +32,13 @@ def debug(*args):
 
 
 N = int(input())
-A = list(map(int, input().split()))
+A = list(map(lambda x: int(x) - 1, input().split()))
 
 # reverse pathは、複数の経路があることに注意
 rev_path = [[] for _ in range(N)]
 stuck = set()
 stucked = [-1] * N
 for i in range(N):
-    A[i] -= 1
     if A[i] == i:
         stuck.add(i)
         stucked[i] = i
