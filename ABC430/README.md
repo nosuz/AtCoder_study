@@ -23,6 +23,12 @@ Aを満たす位置とBを満たす位置を探す。尺取り法。
 
 ## [D - Neighbor Distance](https://atcoder.jp/contests/abc430/tasks/abc430_d)
 
+配列に順次挿入していくのはコストが高い。とりあえず配列に詰めた後でソートして、最後から巻き戻す。削除もコストがかかるので、Linked-List風に隣を管理する。
+
+削除する場所を探すために二分探索を使ったが、HashMapを使ったほうが計算量が少ない。
+
+- Java
+
 ## [E - Shift String](https://atcoder.jp/contests/abc430/tasks/abc430_e)
 
 ## [F - Back and Forth Filling](https://atcoder.jp/contests/abc430/tasks/abc430_f)
