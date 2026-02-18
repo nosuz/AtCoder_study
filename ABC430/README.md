@@ -31,4 +31,8 @@ Aを満たす位置とBを満たす位置を探す。尺取り法。
 
 ## [E - Shift String](https://atcoder.jp/contests/abc430/tasks/abc430_e)
 
+固定サイズの窓でハッシュを作るのでは間に合わない。全体で一つのハッシュ値を作成し、ずらしながら（頭の値の寄与をキャンセルして最後に新しい値を加える）ローリングサークルのハッシュ値を作成して比較。
+
+- Java
+
 ## [F - Back and Forth Filling](https://atcoder.jp/contests/abc430/tasks/abc430_f)
