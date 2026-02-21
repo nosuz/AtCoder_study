@@ -20,6 +20,10 @@
 
 ## [C - Omelette Restaurant](https://atcoder.jp/contests/abc446/tasks/abc446_c)
 
+queueを使うというヒントを元にdouble indexで消費と納品を管理。
+
+- Python
+
 ## [D - Max Straight](https://atcoder.jp/contests/abc446/tasks/abc446_d)
 
 ## [E - Multiple-Free Sequences](https://atcoder.jp/contests/abc446/tasks/abc446_e)
