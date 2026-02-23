@@ -34,14 +34,6 @@ RUN set -eux; \
     groupadd --gid "${GID}" "${USERNAME}"; \
     useradd --uid "${UID}" --gid "${GID}" -s /bin/bash -m "${USERNAME}"
 
-# Enable sudo
-# RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-#     --mount=type=cache,target=/var/lib/apt,sharing=locked \
-#     apt-get update \
-#     && apt-get install -y sudo \
-#     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-#     && chmod 0440 /etc/sudoers.d/$USERNAME
-
 # https://github.com/moby/buildkit/issues/1662#issuecomment-683962222
 # https://docs.docker.com/reference/dockerfile/?__readwiseLocation=#example-cache-apt-packages
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -52,7 +44,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     # ssh is required to handle GitHub in the container
     git ssh \
     # install python
-    python3 python3-venv python-is-python3 \
+    python3 python3-venv \
     # install java
     default-jdk-headless \
     # required to install sdkman and gradle
@@ -70,21 +62,29 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 # Default user
 USER vscode
 
-# install library
-COPY requirements.txt .
-ARG PIP_CACHE_DIR=/home/vscode/.cache/pip
-RUN mkdir -p $PIP_CACHE_DIR
-RUN --mount=type=cache,target=/home/vscode/.cache/pip,sharing=locked  \
-    python3 -m venv /home/vscode/venv \
-    && /home/vscode/venv/bin/pip install --upgrade pip \
-    && /home/vscode/venv/bin/pip install -r requirements.txt
+# install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+ENV UV_PROJECT_ENVIRONMENT=/home/vscode/venv
+ARG UV_CACHE_DIR=/home/vscode/.cache/uv
+RUN mkdir -p $UV_CACHE_DIR
+
+# blank uv.lock is just place holder.
+# remove this before adding the initial library.
+COPY pyproject.toml uv.lock ./
+# set `--frozen` to `uv sync` on runtime
+RUN --mount=type=cache,target=$UV_CACHE_DIR,uid=$UID,gid=$UID,sharing=locked \
+    /home/vscode/.local/bin/uv venv /home/vscode/venv \
+    && if [ -s uv.lock ]; then /home/vscode/.local/bin/uv sync; fi
 
 # activate venv
 RUN cat <<'EOF' >> /home/vscode/.bashrc
 
 export LANG=$LANG
 
-if [ -f "$HOME/venv/bin/activate" ] && [ -z "$VIRTUAL_ENV" ]; then
-    . "$HOME/venv/bin/activate"
+if [ -n "$UV_PROJECT_ENVIRONMENT" ] &&
+    [ -f "$UV_PROJECT_ENVIRONMENT/bin/activate" ] &&
+    [ -z "$VIRTUAL_ENV" ]; then
+    . "$UV_PROJECT_ENVIRONMENT/bin/activate"
 fi
 EOF
