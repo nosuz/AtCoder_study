@@ -26,6 +26,10 @@ queueを使うというヒントを元にdouble indexで消費と納品を管理
 
 ## [D - Max Straight](https://atcoder.jp/contests/abc446/tasks/abc446_d)
 
+ABC443のD問題がヒントになった。自分より前に１つ下があれば繋げられるので、長さを更新する。
+
+- Python
+
 ## [E - Multiple-Free Sequences](https://atcoder.jp/contests/abc446/tasks/abc446_e)
 
 ## [F - Reachable Set 2](https://atcoder.jp/contests/abc446/tasks/abc446_f)
