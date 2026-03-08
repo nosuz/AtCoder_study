@@ -14,6 +14,10 @@
 
 ## [B - Pepper Addiction](https://atcoder.jp/contests/abc448/tasks/abc448_b)
 
+ループと消費可能量比較。
+
+- Python
+
 ## [C - Except and Min](https://atcoder.jp/contests/abc448/tasks/abc448_c)
 
 ## [D - Integer-duplicated Path](https://atcoder.jp/contests/abc448/tasks/abc448_d)
