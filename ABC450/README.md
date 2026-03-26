@@ -20,6 +20,12 @@ $N \le 100$なので、単純に全ての組み合わせを考えても最大$10
 
 ## [C - Puddles](https://atcoder.jp/contests/abc450/tasks/abc450_c)
 
+探索問題。上下左右のいずれかでつながった領域を探索する。つながっていないエリアは探索から外れるはずなので、独立に探索した回数が答えになる。
+
+と考えたけど、なにか考慮が漏れている。
+
+- Python
+
 ## [D - Minimize Range](https://atcoder.jp/contests/abc450/tasks/abc450_d)
 
 何かを基準として、各$A$をその基準に近づける問題。
