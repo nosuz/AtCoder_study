@@ -76,22 +76,15 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 コンテナを作成する手順は、次のとおりです。
 
 1. このレポジトリをクローンする。
-2. UID と GID を確認する。
-
-もしローカルの UID と GID が次の表と異なる場合は、次のいずれかのコマンドを実行してローカルの ID がコンテナに反映されるように設定してください。この操作がないと、docker image の作成に時間がかかり、作成された image のサイズも大きくなります。
+2. UID と GID が次の表と同じか確認する。
+3. VSCode で開き、コマンドパレットから`Dev Containers: Rebuild Container`を実行する。
 
 |     | ID   |
 | --- | ---- |
 | UID | 1000 |
 | GID | 1000 |
 
-1. VSCode で開き、コマンドパレットから`Dev Containers: Rebuild Container`を実行する。
-
-```
-bash .devcontainer/generate_env.sh
-# or
-python .devcontainer/generate_env.py
-```
+もしローカルの UID と GID が表と異なる場合は、[atcoder_devcon](https://github.com/nosuz/atcoder_devcon)と[dev_container](https://github.com/nosuz/dev_container)を参照して自身のUIDとGIDが反映されるように設定します。その上でコンテナを作成します。
 
 以上で、Python 環境の他、問題の入出力例を取得するプログラムが使えるようになります。
 
@@ -103,7 +96,7 @@ python .devcontainer/generate_env.py
 ./setup.py --login
 ```
 
-`Screen Name`が表示されない場合は、ログイン状態が解除されています。Web Browserからcookie情報をコピーしてください。
+`Screen Name`が表示されない場合は、ログイン状態が解除されています。その場合は、[atcoder_devcon](https://github.com/nosuz/atcoder_devcon)を参照して、ホストのWeb Browserからcookie情報をコピーしてください。
 
 ### 入力・出力例の取得とコード作成
 

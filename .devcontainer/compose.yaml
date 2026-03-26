@@ -3,10 +3,6 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-      # set by `.env`
-      # args:
-      #   UID: ${UID:-1000}
-      #   GID: ${GID:-1000}
     command: sleep infinity
     volumes:
       - ..:/workspaces
