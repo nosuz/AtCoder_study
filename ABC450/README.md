@@ -22,6 +22,12 @@ $N \le 100$なので、単純に全ての組み合わせを考えても最大$10
 
 ## [D - Minimize Range](https://atcoder.jp/contests/abc450/tasks/abc450_d)
 
+何かを基準として、各$A$をその基準に近づける問題。
+
+基準値に$\max (A)$を使ったが、これが間違いかも。
+
+- Python
+
 ## [E - Fibonacci String](https://atcoder.jp/contests/abc450/tasks/abc450_e)
 
 ## [F - Strongly Connected 2](https://atcoder.jp/contests/abc450/tasks/abc450_f)
