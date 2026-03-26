@@ -49,8 +49,6 @@ def make_neighbor(H, W, pos):
 def paint_dot(h, w):
     global map
 
-    # `#`で囲まれたエリアかのフラグ
-    closed_area = True
     stack = [(h,w)]
     # 深さ優先探索で`.`を消す。
     while len(stack) > 0:
@@ -60,15 +58,9 @@ def paint_dot(h, w):
 
         map[pos[0]][pos[1]] = '#'
 
-        neighbors = make_neighbor(H, W, pos)
-        if len(neighbors) < 4:
-            # mapからはみ出したということは、閉じていない
-            closed_area = False
-        for neighbor in neighbors:
+        for neighbor in make_neighbor(H, W, pos):
             if map[neighbor[0]][neighbor[1]] == '.':
                 stack.append(neighbor)
-
-    return closed_area
 
 H, W = map(int, input().split())
 
@@ -77,14 +69,27 @@ for _ in range(H):
     map.append(list(input()))
 # debug(map)
 
-stack = []
+# 絶対に閉じていない、すなわち最も外側の`.`を含むエリアを消す。
+for h in [0, H-1]:
+    for w in range(W):
+        if map[h][w] == '.':
+            # 深さ優先探索で`.`を消す。
+            paint_dot(h, w)
+for h in range(1, H-1):
+    for w in [0, W-1]:
+        if map[h][w] == '.':
+            # 深さ優先探索で`.`を消す。
+            paint_dot(h, w)
+# debug(stack)
+debug(map)
+
+# 内側をスキャンして`.`を探す。
 count = 0
 for h in range(1, H-1):
     for w in range(1, W-1):
         if map[h][w] == '.':
+            count += 1
             # 深さ優先探索で見つけた場所に連なるエリアを塗りつぶす
-            closed_area = paint_dot(h, w)
-            if closed_area:
-                count += 1
+            paint_dot(h, w)
 
 print(count)
