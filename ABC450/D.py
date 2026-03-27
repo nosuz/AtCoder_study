@@ -25,6 +25,14 @@
 5 4 9
 <expected> 5
 
+3 4
+2 3 4
+<expected> 2
+
+5 10
+3 4 5 6 7
+<expected> 4
+
 """
 
 import os
@@ -38,49 +46,22 @@ def debug(*args):
 N, K = map(int, input().split())
 A = list(map(int, input().split()))
 
-max_a = max(A)
-# th以下ならば、max_aを超えないほうが良い。
-th = K // 2
+mods = [A[i] % K for i in range(N)]
+mods.sort()
+debug(mods)
 
-delta_less = []
-delta_more = []
-has_eqaul = False
-for i in range(N):
-    mod = (max_a - A[i]) % K
-    mod_alt = K - mod
-    debug(f"-A:{A[i]}, less:{mod}, more:{mod_alt}")
-    if mod == 0:
-        # ピッタリ
-        continue
+# 先頭と最後の間隔が最大と仮定する。
+# その場合は、今の配列が最もコンパクト
+max_gap = mods[0] - (mods[-1]-K)
+max_a = mods[-1]
+min_a = mods[0]
 
-    if mod == mod_alt:
-        # 同じ時は特別扱い
-        has_eqaul = True
-        continue
+# 間隔が最大の場所を探す。
+for i in range(N-1):
+    gap = mods[i+1] - mods[i]
+    if gap > max_gap:
+        max_a = mods[i]
+        min_a = mods[i+1]-K
+        max_gap = gap
 
-    if mod <= th:
-        # 超えないほうが有利
-        delta_less.append(mod)
-    else:
-        # 超えたほうが有利
-        delta_more.append(mod_alt)
-debug(delta_less, delta_more)
-
-# moreとlessで最悪の値を探す
-if len(delta_less) == 0:
-    max_less =0
-else:
-    max_less = max(delta_less)
-
-if len(delta_more) == 0:
-    max_more =0
-else:
-    max_more = max(delta_more)
-
-if has_eqaul:
-    # どっちに付いたほうが有利か？
-    if max_less > max_more:
-        max_less = th # equalになる時は、偶数でthと等しい
-    else:
-        max_more = th
-print(max_less + max_more)
+print(max_a - min_a)
