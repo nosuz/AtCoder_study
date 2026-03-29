@@ -169,11 +169,21 @@ for index, value in enumerate(num):
 ```python
 from collections import defaultdict
 
-d = defaultdict(lambda: 0)
+d = defaultdict(int)
 d["a"] += 1
 d["b"] = 1
 print(d)
 ```
+
+引数で、初期値の型を指定する。
+
+| 初期化                   | 説明                            |
+| ------------------------ | ------------------------------- |
+| `defaultdict(int)`       | 初期値が数値(0)                 |
+| `defaultdict(list)`      | 初期値が空のリスト              |
+| `defaultdict(set)`       | 初期値が空のセット              |
+| `defaultdict(lambda: 1)` | 初期値を指定の数値数値(1)にする |
+
 
 ### each
 
@@ -206,4 +216,24 @@ import math
 
 math.floor()
 math.ceil()
+```
+
+## 優先度付きキュー（ヒープキュー）
+
+```python
+import heapq
+
+cue = []
+
+# 挿入 O(logN)
+heapq.heappush(tque, 3)
+heapq.heappush(tque, 2)
+heapq.heappush(tque, 1)
+
+# 最小値
+trees[0]
+# [-1]を含め、他の順番は保証されない。
+
+# 最小値を取り除く O(1)
+heapq.heappop(que)
 ```
