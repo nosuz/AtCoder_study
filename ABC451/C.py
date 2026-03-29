@@ -50,6 +50,7 @@
 """
 
 import os
+import heapq
 
 
 def debug(*args):
@@ -57,67 +58,19 @@ def debug(*args):
         print(*args)
 
 
-def bin_search_left(target, lst):
-    left = 0
-    right = len(lst) - 1
-    result = -1
-
-    while right >= left:
-        p = (right + left) // 2
-        if target < lst[p]:
-            right = p - 1
-        elif target > lst[p]:
-            result = p
-            left = p + 1
-        else:
-            return p
-
-    # targetより小さい要素の最大インデックス（なければ-1）
-    return result
-
-def bin_search_right(target, lst):
-    left = 0
-    right = len(lst) - 1
-    result = -1
-
-    while right >= left:
-        p = (right + left) // 2
-        if target < lst[p]:
-            result = p
-            right = p - 1
-        elif target > lst[p]:
-            left = p + 1
-        else:
-            return p
-
-    # targetより大きい要素の最小インデックス（なければ-1）
-    return result
-
 Q = int(input())
 
 trees = []
-cut = 0
-count = []
 for _ in range(Q):
     command, height = map(int, input().split())
-    # debug(f"c:{command},i:{index},{index_left},cut:{cut}")
     if command == 1:
         # 植える
-        index = bin_search_right(height, trees, cut)
-        if index == -1:
-            trees.append(height)
-        else:
-            trees.insert(index+cut, height)
+        heapq.heappush(trees, height)
     else:
         # 切る
-        index = bin_search_left(height, trees, cut)
-        if index == -1:
-            cut = 0
-            trees = []
-        else:
-            cut = index+1
+        while len(trees):
+            if trees[0] > height:
+                break
+            heapq.heappop(trees)
     debug(trees)
-
-    count.append(len(trees) - cut)
-
-print(*count)
+    print(len(trees))
