@@ -30,6 +30,13 @@
 
 ## [D - Concat Power of 2](https://atcoder.jp/contests/abc451/tasks/abc451_d)
 
+$2^n \le 10^9$となる数は、$\log_2{10^9} = \frac{\log10^9}{\log{2}} \approx 29.9 \lt 30$と少ない。
+
+これを組み合わせて、9桁以下の全ての組み合わせを作成する。組み合わせの作成には、`deque`を使う方法と幅優先探索を使う方法が考えられる。
+
+- Python
+
+
 ## [E - Tree Distance](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 
 ## [F - Make Bipartite 3](https://atcoder.jp/contests/abc451/tasks/abc451_f)
