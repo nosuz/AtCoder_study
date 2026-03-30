@@ -239,3 +239,21 @@ trees[0]
 # 最小値を取り除く O(1)
 heapq.heappop(que)
 ```
+
+## deque
+
+末尾だけでなく先頭への追加と削除が速い。
+
+```python
+from collections import deque
+
+que = deque()
+
+# 末尾に追加と削除
+que.append(1)
+que.pop()
+
+# 先頭に追加と削除
+que.appendleft(1)
+que.popleft()
+```
