@@ -52,7 +52,9 @@ while fifo:
         r = q[0] * shift + t[0]
         r_len = t[1] + q[1]
         if r_len > 9:
-            continue
+            # この後の数字は、同じ桁数かより桁数が大きい。
+            # よってこの後は調べる必要がない。
+            break
         # 既に見つかった数か調べなくても間に合う
         candidate.add(r)
 
