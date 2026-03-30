@@ -220,12 +220,14 @@ math.ceil()
 
 ## 優先度付きキュー（ヒープキュー）
 
+先頭から小さい順に取り出せる。普通のlistだとO(N)かかるが、O(1)で済む。
+
 ```python
 import heapq
 
 cue = []
 
-# 挿入 O(logN)
+# 追加 O(logN)
 heapq.heappush(tque, 3)
 heapq.heappush(tque, 2)
 heapq.heappush(tque, 1)
