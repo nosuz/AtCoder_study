@@ -34,6 +34,8 @@ $K \le 5$ という条件に気がつくかが大切。
 
 この場合、戻ってきた時にカウントを引き算する必要がある。再帰で処理するのが一般的と思うが、nodeの探索から戻ったことを示すマーカーをスタックに積むことで再帰でなくともカウントを引き算する。
 
+`D_alt.py` に再帰を使った方法も実装してみた。この場合は、 `RecursionError` に注意が必要。
+
 - Python
 
 ## [E - Simple Division](https://atcoder.jp/contests/abc448/tasks/abc448_e)

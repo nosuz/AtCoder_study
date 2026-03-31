@@ -72,6 +72,7 @@ __pycache__/
 !tests/test_c.py
 !D.py
 !tests/test_d.py
+!D_alt.py
 # !E.py
 # !tests/test_e.py
 # !F.py
