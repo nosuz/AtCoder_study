@@ -28,6 +28,14 @@ $K \le 5$ という条件に気がつくかが大切。
 
 ## [D - Integer-duplicated Path](https://atcoder.jp/contests/abc448/tasks/abc448_d)
 
+深さ優先探索。
+
+これまでの値を `set()` で持ち回ると、node毎にコピーが必要になってしまう。そこで、これまでの値をカウントして、node間で共有する。
+
+この場合、戻ってきた時にカウントを引き算する必要がある。再帰で処理するのが一般的と思うが、nodeの探索から戻ったことを示すマーカーをスタックに積むことで再帰でなくともカウントを引き算する。
+
+- Python
+
 ## [E - Simple Division](https://atcoder.jp/contests/abc448/tasks/abc448_e)
 
 ## [F - Authentic Traveling Salesman Problem](https://atcoder.jp/contests/abc448/tasks/abc448_f)
