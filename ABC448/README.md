@@ -8,7 +8,15 @@
 
 ## [A - chmin](https://atcoder.jp/contests/abc448/tasks/abc448_a)
 
+ループと比較。
+
+- Python
+
 ## [B - Pepper Addiction](https://atcoder.jp/contests/abc448/tasks/abc448_b)
+
+リストの更新。
+
+- Python
 
 ## [C - Except and Min](https://atcoder.jp/contests/abc448/tasks/abc448_c)
 
