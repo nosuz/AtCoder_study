@@ -8,17 +8,15 @@
 
 ## [A - chmin](https://atcoder.jp/contests/abc448/tasks/abc448_a)
 
-配列をループと条件分岐。
-
-- Python
-
 ## [B - Pepper Addiction](https://atcoder.jp/contests/abc448/tasks/abc448_b)
 
-ループと消費可能量比較。
+## [C - Except and Min](https://atcoder.jp/contests/abc448/tasks/abc448_c)
+
+$K \le 5$ という条件に気がつくかが大切。
+
+計算量は、 $A$ のソートの部分が大きい。
 
 - Python
-
-## [C - Except and Min](https://atcoder.jp/contests/abc448/tasks/abc448_c)
 
 ## [D - Integer-duplicated Path](https://atcoder.jp/contests/abc448/tasks/abc448_d)
 
