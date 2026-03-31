@@ -14,6 +14,10 @@
 
 ## [B - String Too Long](https://atcoder.jp/contests/abc414/tasks/abc414_b)
 
+リストまたは文字列の結合。
+
+- Python
+
 ## [C - Palindromic in Both Bases](https://atcoder.jp/contests/abc414/tasks/abc414_c)
 
 ## [D - Transmission Mission](https://atcoder.jp/contests/abc414/tasks/abc414_d)
