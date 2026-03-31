@@ -8,6 +8,10 @@
 
 ## [A - Streamer Takahashi](https://atcoder.jp/contests/abc414/tasks/abc414_a)
 
+比較。
+
+- Python
+
 ## [B - String Too Long](https://atcoder.jp/contests/abc414/tasks/abc414_b)
 
 ## [C - Palindromic in Both Bases](https://atcoder.jp/contests/abc414/tasks/abc414_c)
@@ -17,5 +21,3 @@
 ## [E - Count A%B=C](https://atcoder.jp/contests/abc414/tasks/abc414_e)
 
 ## [F - Jump Traveling](https://atcoder.jp/contests/abc414/tasks/abc414_f)
-
-

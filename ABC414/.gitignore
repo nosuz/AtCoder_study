@@ -28,8 +28,8 @@ __pycache__/
 
 # --- Python ---
 # 解けなかった問題は、以下の行のコメント (#) を外してください
-A.py
-tests/test_a.py
+# A.py
+# tests/test_a.py
 B.py
 tests/test_b.py
 C.py
