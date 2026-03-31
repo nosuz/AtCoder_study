@@ -237,7 +237,7 @@ trees[0]
 # [-1]を含め、他の順番は保証されない。
 
 # 最小値を取り除く O(1)
-heapq.heappop(que)
+smallest = heapq.heappop(que)
 ```
 
 ## deque
