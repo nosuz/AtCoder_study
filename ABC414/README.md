@@ -20,6 +20,14 @@
 
 ## [C - Palindromic in Both Bases](https://atcoder.jp/contests/abc414/tasks/abc414_c)
 
+回文を再帰で作成。
+
+頭とお尻に加える方法は、途中に許される0を含めなくなってしまう。そこで真ん中に加えていく。
+
+1桁の場合に、N以下かを調べ忘れてWA。
+
+- Python
+
 ## [D - Transmission Mission](https://atcoder.jp/contests/abc414/tasks/abc414_d)
 
 ## [E - Count A%B=C](https://atcoder.jp/contests/abc414/tasks/abc414_e)
