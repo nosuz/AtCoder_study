@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 
-# python3 validate.py sample.py
+# B - Grid Rotation
+# https://atcoder.jp/contests/abc404/tasks/abc404_b
+
+# python ../validate.py B.py
+
+# pytest tests/test_b.py
+# pytest tests/test_b.py -k sample1
+
 """TEST_DATA
 4
 ###.
@@ -42,13 +49,19 @@
 ..##..###..#.
 <expected> 5
 
-
 """
+
+import os
+
+
+def debug(*args):
+    if os.environ.get("DEBUG") in ("1", "true", "True", "yes"):
+        print(*args)
 
 
 def rotate_90(grid):
     n = len(grid)
-    temp = [['' for _ in range(n)] for _ in range(n)]
+    temp = [["" for _ in range(n)] for _ in range(n)]
     for y in range(n):
         for x in range(n):
             temp[x][y] = grid[n - y - 1][x]
@@ -85,7 +98,7 @@ for i in range(3):
     rotate[i + 1] = mismatch + i + 1
 # print(rotate)
 
-min = n*n
+min = n * n
 for i in range(4):
     if min > rotate[i]:
         min = rotate[i]
