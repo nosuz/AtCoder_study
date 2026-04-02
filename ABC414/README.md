@@ -30,6 +30,12 @@
 
 ## [D - Transmission Mission](https://atcoder.jp/contests/abc414/tasks/abc414_d)
 
+貪欲法。
+
+家の間隔が離れている順に切断する。
+
+- Python
+
 ## [E - Count A%B=C](https://atcoder.jp/contests/abc414/tasks/abc414_e)
 
 ## [F - Jump Traveling](https://atcoder.jp/contests/abc414/tasks/abc414_f)
