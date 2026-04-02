@@ -69,6 +69,16 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 | [ABC450](./ABC450/)  |                | 🙆🐍 | 🙆🐍 | 🙆🐍 | 📖🐍 |     |     |
 | [ABC451](./ABC451/)  |      270       | ✅🐍  | ✅🐍  | 📖🐍 | 📖🐍 |     |     |
 
+## アルゴリズム
+
+### 再帰
+
+- [ABC414_C - Palindromic in Both Bases](ABC414/C.py)
+
+### 貪欲法
+
+- [ABC414_D - Transmission Mission](ABC414/D.py)
+
 ## Dev Container
 
 [AtCoder用のDev Container](https://github.com/nosuz/atcoder_devcon)を使用しています。そのため、プログラミング環境の他、Javaのコードを簡単にコンテストページに貼り付けるChrome拡張などもレポジトリに含んでいます。
