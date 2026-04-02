@@ -257,3 +257,13 @@ que.pop()
 que.appendleft(1)
 que.popleft()
 ```
+
+## 再帰
+
+再帰の最大回数の上限を変更する。
+
+```python
+import sys
+
+sys.setrecursionlimit(10**7)
+```
