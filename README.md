@@ -20,7 +20,7 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 | [ABC401](./ABC_401/) |      239       |   ✅   |   ✅   |  🙆   |        |     |     |
 | [ABC402](./ABC_402/) |      188       |   ✅   |   ✅   |  🙆   |  🙆   |     |     |
 | [ABC403](./ABC_403/) |      582       |   ✅   |   ✅   |   ✅   |        |     |     |
-| [ABC404](./ABC404/) |      297       |   ✅🐍   |   ✅🐍   |        |        |     |     |
+| [ABC404](./ABC404/)  |      297       | ✅🐍  | ✅🐍  | 🙆🐍 |        |     |     |
 | [ABC405](./ABC_405/) |      622       |   ✅   |   ✅   |   ✅   |   ✅   |     | ❌  |
 | [ABC406](./ABC_406/) |      487       |   ✅   |   ✅   |        |  🙆   |     |     |
 | [ABC407](./ABC_407/) |      478       |   ✅   |   ✅   |   ✅   |        |     |     |
@@ -78,6 +78,10 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 ### 貪欲法
 
 - [ABC414_D - Transmission Mission](ABC414/D.py)
+
+### 深さ優先探索
+
+- [ABC404_C - Cycle Graph?](ABC404/C.py)
 
 ## Dev Container
 

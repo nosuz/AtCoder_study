@@ -22,6 +22,10 @@
 
 ## [C - Cycle Graph?](https://atcoder.jp/contests/abc404/tasks/abc404_c)
 
+深さ優先探索。サイクルグラフは、各nodeは辺の数が2のはず。
+
+- Python
+
 ## [D - Goin' to the Zoo](https://atcoder.jp/contests/abc404/tasks/abc404_d)
 
 ## [E - Bowls and Beans](https://atcoder.jp/contests/abc404/tasks/abc404_e)
