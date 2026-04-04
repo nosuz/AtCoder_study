@@ -20,6 +20,12 @@
 
 ## [C - Fishbones](https://atcoder.jp/contests/abc452/tasks/abc452_c)
 
+単語の長さと位置に対応する辞書を事前に作成しておく。
+
+`debug()`が想定外に高コストなので、コメントアウトしないとLTEになる。
+
+- Python
+
 ## [D - No-Subsequence Substring](https://atcoder.jp/contests/abc452/tasks/abc452_d)
 
 ## [E - You WILL Like Sigma Problem](https://atcoder.jp/contests/abc452/tasks/abc452_e)
