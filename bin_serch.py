@@ -1,3 +1,6 @@
+from bisect import bisect_left, bisect_right
+
+
 def bin_search(target, lst):
     left = 0
     right = len(lst) - 1
@@ -55,14 +58,16 @@ def bin_search_right(target, lst):
 
 
 if __name__ == "__main__":
-    lst = [0, 2, 4, 5]
+    lst = [0, 2, 4, 4, 5]
 
     print(lst)
     for i in [-1, 3, 4, 5, 6]:
         p = bin_search(i, lst)
         p_left = bin_search_left(i, lst)
         p_right = bin_search_right(i, lst)
+        p_bl = bisect_left(lst, i)
+        p_br = bisect_right(lst, i)
         print(
-            f"bin_search_right: {i} => {p}, left:{p_left}, right: {p_right}",
+            f"bin_search_right: {i} => {p}, left:{p_left}, right: {p_right}, b_left:{p_bl}, b_right:{p_br}",
             end="\n\n",
         )
