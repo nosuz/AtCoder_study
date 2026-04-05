@@ -30,6 +30,8 @@
 
 尺取り法？ACにはなったけど、毎回 $T$ にマッチするか調べているので、良くない。
 
+Tの文字が次に出てくる位置を事前に作成しておく [D_alt.py](D_alt.py) と速くなるらしい。しかし、実際に実行すると、最初のコード [D.py](D.py) のほうが速かった。
+
 - Python
 
 ## [E - You WILL Like Sigma Problem](https://atcoder.jp/contests/abc452/tasks/abc452_e)
