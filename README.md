@@ -68,7 +68,7 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 | [ABC449](./ABC449/)  |      684       |   ✅   |   ✅   |   ✅   |  🙆   |     |     |
 | [ABC450](./ABC450/)  |                | 🙆🐍 | 🙆🐍 | 🙆🐍 | 📖🐍 |     |     |
 | [ABC451](./ABC451/)  |      270       | ✅🐍  | ✅🐍  | 📖🐍 | 📖🐍 |     |     |
-| [ABC452](./ABC452/)  |      439       | ✅🐍  | ✅🐍  | 📖🐍 |        |     |     |
+| [ABC452](./ABC452/)  |      439       | ✅🐍  | ✅🐍  | 📖🐍 | 🙆🐍  |     |     |
 
 ## アルゴリズム
 
@@ -87,6 +87,10 @@ AtCoder Beginner Contest(ABC)の問題を解いた記録です。基本的に正
 ### bit全探索
 
 - [ABC404_D - Goin' to the Zoo](ABC404/C.py) ただし0,1,2の3進数。
+
+### 尺取り法
+
+- [ABC452_D - No-Subsequence Substring](ABC452/D.py)
 
 ## Dev Container
 

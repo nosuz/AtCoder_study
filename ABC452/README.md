@@ -28,6 +28,10 @@
 
 ## [D - No-Subsequence Substring](https://atcoder.jp/contests/abc452/tasks/abc452_d)
 
+尺取り法？ACにはなったけど、毎回 $T$ にマッチするか調べているので、良くない。
+
+- Python
+
 ## [E - You WILL Like Sigma Problem](https://atcoder.jp/contests/abc452/tasks/abc452_e)
 
 ## [F - Interval Inversion Count](https://atcoder.jp/contests/abc452/tasks/abc452_f)
