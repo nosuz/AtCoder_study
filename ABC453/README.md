@@ -22,6 +22,8 @@
 
 bit全探索。単純に0を超えたら逆方向に移動ではなかった。
 
+スタート位置が0.5なので、全体を2倍すれば整数演算にできる。
+
 - Python
 
 ## [D - Go Straight](https://atcoder.jp/contests/abc453/tasks/abc453_d)

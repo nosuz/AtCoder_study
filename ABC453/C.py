@@ -65,7 +65,8 @@ def move(count, p, pos):
 
 N = int(input())
 L = list(map(int, input().split()))
+L = [l * 2 for l in L]
 
 right = False
-count = move(0, 0, 0.5)
+count = move(0, 0, 1)
 print(count)
