@@ -2,6 +2,7 @@
 __pycache__/
 cookies.json
 sample.py
+default_lang.txt
 
 # unsolved problems
 # ABC_392
